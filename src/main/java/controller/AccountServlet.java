@@ -14,9 +14,15 @@ public class AccountServlet extends HttpServlet {
             action = "";
         }
         switch (action){
-
+            default:
+                showHomePage(request,response);
+                break;
         }
 
+    }
+
+    private void showHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("home/productList.jsp").forward(request,response);
     }
 
     @Override
