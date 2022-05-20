@@ -1,4 +1,7 @@
 package dao.user;
 
-public interface IUserDAO {
+import dao.IDAO;
+import model.User;
+
+public interface IUserDAO extends IDAO<User> {
 }
