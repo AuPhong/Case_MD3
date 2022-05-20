@@ -143,19 +143,21 @@
             <div class="col-lg-6">
                 <form action="accounts?action=register" method="post">
                     <div class="register-form">
+                        <p class="text-danger">${error}${error1}</p>
+                        <p class="text-success">${success}</p>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="First Name" name="first_name">
+                                <label>Full name</label>
+                                <input class="form-control" type="text" placeholder="Full name" name="fullName">
                             </div>
                             <div class="col-md-6">
-                                <label>Last Name"</label>
-                                <input class="form-control" type="text" placeholder="Last Name" name="last_name">
+                                <label>User name</label>
+                                <input class="form-control" type="text" placeholder="User name" name="userName">
                             </div>
-                            <div class="col-md-6">
-                                <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="E-mail" name="email">
-                            </div>
+<%--                            <div class="col-md-6">--%>
+<%--                                <label>E-mail</label>--%>
+<%--                                <input class="form-control" type="text" placeholder="E-mail" name="email">--%>
+<%--                            </div>--%>
                             <div class="col-md-6">
                                 <label>Mobile No</label>
                                 <input class="form-control" type="text" placeholder="Mobile No" name="phone">
@@ -182,7 +184,7 @@
                     <div class="login-form">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Username</label>
+                                <label>User name</label>
                                 <input class="form-control" type="text" name="name" placeholder="Username">
                             </div>
                             <div class="col-md-6">

@@ -16,6 +16,13 @@ private String role;
         this.password = password;
     }
 
+    public User(String full_name, String user_name, String password, String phone) {
+        this.full_name = full_name;
+        this.user_name = user_name;
+        this.password = password;
+        this.phone = phone;
+    }
+
     public User(int user_id, String full_name, String user_name, String password, String phone, String role) {
         this.user_id = user_id;
         this.full_name = full_name;
