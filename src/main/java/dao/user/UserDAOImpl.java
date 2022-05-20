@@ -7,6 +7,8 @@ import org.omg.CORBA.IDLTypeHelper;
 import java.util.List;
 
 public class UserDAOImpl implements IUserDAO {
+
+
     @Override
     public List<User> findAll() {
         return null;
