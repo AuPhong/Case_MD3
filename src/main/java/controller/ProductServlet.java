@@ -5,8 +5,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AccountServlet", value = "/accounts")
-public class AccountServlet extends HttpServlet {
+@WebServlet(name = "ProductServlet", value = "/products")
+public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -15,15 +15,13 @@ public class AccountServlet extends HttpServlet {
         }
         switch (action){
             default:
-                showLoginPage(request,response);
+                showHomePage(request,response);
                 break;
         }
-
     }
-
-    private void showLoginPage(HttpServletRequest request, HttpServletResponse response) {
+    private void showHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("home/productList.jsp").forward(request,response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
