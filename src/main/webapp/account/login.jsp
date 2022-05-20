@@ -141,49 +141,55 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
-                <div class="register-form">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="First Name">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Last Name"</label>
-                            <input class="form-control" type="text" placeholder="Last Name">
-                        </div>
-                        <div class="col-md-6">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="E-mail">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="Mobile No">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Password</label>
-                            <input class="form-control" type="text" placeholder="Password">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Retype Password</label>
-                            <input class="form-control" type="text" placeholder="Password">
-                        </div>
-                        <div class="col-md-12">
-                            <button class="btn">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <form action="accounts?action=login" method="post">
-                    <div class="login-form">
+                <form action="accounts?action=register" method="post">
+                    <div class="register-form">
+                        <p class="text-danger">${error}${error1}</p>
+                        <p class="text-success">${success}</p>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Username</label>
-                                <input class="form-control" type="text" placeholder="Username">
+                                <label>Full name</label>
+                                <input class="form-control" type="text" placeholder="Full name" name="fullName">
+                            </div>
+                            <div class="col-md-6">
+                                <label>User name</label>
+                                <input class="form-control" type="text" placeholder="User name" name="userName">
+                            </div>
+<%--                            <div class="col-md-6">--%>
+<%--                                <label>E-mail</label>--%>
+<%--                                <input class="form-control" type="text" placeholder="E-mail" name="email">--%>
+<%--                            </div>--%>
+                            <div class="col-md-6">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" placeholder="Mobile No" name="phone">
                             </div>
                             <div class="col-md-6">
                                 <label>Password</label>
-                                <input class="form-control" type="text" placeholder="Password">
+                                <input class="form-control" type="text" placeholder="Password" name="password">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Retype Password</label>
+                                <input class="form-control" type="text" placeholder="Password" name="rePassword">
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-lg-6">
+                <form action="accounts?action=login" method="post">
+                    <p class="text-danger">${mess}</p>
+                    <div class="login-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User name</label>
+                                <input class="form-control" type="text" name="name" placeholder="Username">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Password</label>
+                                <input class="form-control" type="text" name="pass" placeholder="Password">
                             </div>
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
