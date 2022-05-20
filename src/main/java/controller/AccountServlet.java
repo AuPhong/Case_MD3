@@ -81,6 +81,8 @@ public class AccountServlet extends HttpServlet {
             request.getRequestDispatcher("account/login.jsp").forward(request, response);
 //            response.sendRedirect("accounts");
         } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("account", user);
             response.sendRedirect("products");
         }
 
