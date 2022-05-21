@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Speedyservice
@@ -79,7 +80,12 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                         <div class="dropdown-menu">
-                            <a href="accounts" class="dropdown-item">Login</a>
+                            <c:if test="${sessionScope.account == null}">
+                                <a href="accounts" class="dropdown-item">Login</a>
+                            </c:if>
+                            <c:if test="${sessionScope.account != null}">
+                                <a href="accounts" class="dropdown-item">Logout</a>
+                            </c:if>
                             <a href="accounts" class="dropdown-item">Register</a>
                         </div>
                     </div>
