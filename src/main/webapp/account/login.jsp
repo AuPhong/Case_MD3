@@ -176,10 +176,10 @@
                             <div class="col-md-6">
                                 <label>Mobile No</label>
                                 <input class="form-control" type="text" placeholder="Mobile No" name="phone">
-                            </div>
+                            </div>x
                             <div class="col-md-6">
                                 <label>Password</label>
-                                <input class="form-control" type="text" placeholder="Password" name="password">
+                                <input class="form-control password-field" type="text" placeholder="Password" name="password">
                             </div>
                             <div class="col-md-6">
                                 <label>Retype Password</label>

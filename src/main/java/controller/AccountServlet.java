@@ -20,7 +20,7 @@ public class AccountServlet extends HttpServlet {
         }
         switch (action) {
             case "logout":
-                logout(request,response);
+                logout(request, response);
                 break;
             default:
                 showLoginPage(request, response);
@@ -66,24 +66,24 @@ public class AccountServlet extends HttpServlet {
         String pass = request.getParameter("password");
         String rePass = request.getParameter("rePassword");
         String roleString = request.getParameter("role");
-        if (roleString.equals("Buyer")){
-            role = 0;
-        } else if (roleString.equals("Seller")){
+        if (roleString.equals("Buyer")) {
             role = 1;
+        } else if (roleString.equals("Seller")) {
+            role = 2;
         } else {
-            role = 0;
+            role = 1;
         }
         if (!pass.equals(rePass)) {
-            request.setAttribute("error","Retype password not match!");
+            request.setAttribute("error", "Retype password not match!");
             request.getRequestDispatcher("account/login.jsp").forward(request, response);
         } else {
             User user = userDAO.checkRegister(userName);
-            if (user!=null){
-                request.setAttribute("error1","User name is already exist!");
+            if (user != null) {
+                request.setAttribute("error1", "User name is already exist!");
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             } else {
-                request.setAttribute("success","Successful!");
-                userDAO.save(new User(fullName,userName,pass,phone,role));
+                request.setAttribute("success", "Successful!");
+                userDAO.save(new User(fullName, userName, pass, phone, role));
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             }
         }

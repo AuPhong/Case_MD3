@@ -64,20 +64,27 @@
                     <a href="home" class="nav-item nav-link active">Home</a>
                     <a href="products" class="nav-item nav-link ">Products</a>
                     <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                    <a href="cart.html" class="nav-item nav-link">Cart</a>
-                    <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-                    <c:if test="${sessionScope.account.getRole() == 1}">
-                        <a href="my-account.html" class="nav-item nav-link">My Account</a>
+                    <c:if test="${sessionScope.account.role == 1}">
+                        <a href="cart.html" class="nav-item nav-link">Cart</a>
+                        <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+                    </c:if>
+                    <c:if test="${sessionScope.account.role == 2}">
+                        <a href="cart.html" class="nav-item nav-link">My products</a>
+                        <a href="cart.html" class="nav-item nav-link">Orders manager</a>
+<%--                        <a href="my-account.html" class="nav-item nav-link">My Account</a>--%>
+                    </c:if>
+                    <c:if test="${sessionScope.account.role == 3}">
+                        <a href="cart.html" class="nav-item nav-link">Manage User</a>
                     </c:if>
 
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                            <a href="login.html" class="dropdown-item">Login & Register</a>
-                            <a href="contact.html" class="dropdown-item">Contact Us</a>
-                        </div>
-                    </div>
+<%--                    <div class="nav-item dropdown">--%>
+<%--                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>--%>
+<%--                        <div class="dropdown-menu">--%>
+<%--                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>--%>
+<%--                            <a href="login.html" class="dropdown-item">Login & Register</a>--%>
+<%--                            <a href="contact.html" class="dropdown-item">Contact Us</a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
                 <c:if test="${sessionScope.account == null}">
                     <div class="navbar-nav ml-auto">
