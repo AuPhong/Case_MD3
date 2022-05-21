@@ -3,44 +3,72 @@ package model;
 public class User {
     private int user_id;
 private String full_name;
-private String user_name;
+private String email;
 private String password;
 private String phone;
 private int role;
+private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public User(String full_name, String email, String password, String phone, int role, String address) {
+        this.full_name = full_name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+    }
+
+    public User(int user_id, String full_name, String email, String password, String phone, int role, String address) {
+        this.user_id = user_id;
+        this.full_name = full_name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+    }
 
     public User() {
     }
 
-    public User(String user_name, String password) {
-        this.user_name = user_name;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public User(String full_name, String user_name, String password, String phone) {
+    public User(String full_name, String email, String password, String phone) {
         this.full_name = full_name;
-        this.user_name = user_name;
+        this.email = email;
         this.password = password;
         this.phone = phone;
     }
 
-    public User(int user_id, String full_name, String user_name, String password, String phone, int role) {
+    public User(int user_id, String full_name, String email, String password, String phone, int role) {
         this.user_id = user_id;
         this.full_name = full_name;
-        this.user_name = user_name;
+        this.email = email;
         this.password = password;
         this.phone = phone;
         this.role = role;
     }
 
-    public User(String user_name, String password, int role) {
-        this.user_name = user_name;
+    public User(String email, String password, int role) {
+        this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public User(String full_name, String user_name, String password, String phone, int role) {
+    public User(String full_name, String email, String password, String phone, int role) {
         this.full_name = full_name;
-        this.user_name = user_name;
+        this.email = email;
         this.password = password;
         this.phone = phone;
         this.role = role;
@@ -62,12 +90,12 @@ private int role;
         this.full_name = full_name;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -99,7 +127,7 @@ private int role;
         return "User{" +
                 "user_id=" + user_id +
                 ", full_name='" + full_name + '\'' +
-                ", user_name='" + user_name + '\'' +
+                ", user_name='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", role='" + role + '\'' +

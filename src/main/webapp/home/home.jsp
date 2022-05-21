@@ -65,8 +65,8 @@
                     <a href="products" class="nav-item nav-link ">Products</a>
 <%--                    <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>--%>
                     <c:if test="${sessionScope.account.role == 1}">
-                        <a href="cart.html" class="nav-item nav-link">Cart</a>
-                        <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+                        <a href="/CartServlet" class="nav-item nav-link">Cart</a>
+                        <a href="/CheckoutServlet" class="nav-item nav-link">Checkout</a>
                     </c:if>
                     <c:if test="${sessionScope.account.role == 2}">
                         <a href="/ProductMangerServlet" class="nav-item nav-link">Product manager</a>
@@ -102,7 +102,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello ${sessionScope.account.full_name}</a>
                             <div class="dropdown-menu">
-                                <a href="accounts" class="dropdown-item">My account</a>
+                                <a href="/MyAccountServlet" class="dropdown-item">My account</a>
                                 <a href="accounts?action=logout" class="dropdown-item">Logout</a>
                             </div>
                         </div>
@@ -133,16 +133,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="user">
-                    <a href="wishlist.html" class="btn wishlist">
-                        <i class="fa fa-heart"></i>
-                        <span>(0)</span>
-                    </a>
-                    <a href="cart.html" class="btn cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
-                    </a>
-                </div>
+                <c:if test="${sessionScope.account.role == 1}">
+                    <div class="user">
+                        <a href="wishlist.html" class="btn wishlist">
+                            <i class="fa fa-heart"></i>
+                            <span>(0)</span>
+                        </a>
+                        <a href="/CartServlet" class="btn cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>(0)</span>
+                        </a>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

@@ -1,8 +1,6 @@
 package dao.user;
 
-import dao.IDAO;
 import model.User;
-import org.omg.CORBA.IDLTypeHelper;
 
 import java.sql.*;
 import java.util.List;
@@ -28,12 +26,14 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     public void save(User user) {
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("insert into user(full_name,user_name,passWord,phone,Role) values (?,?,?,?,?)")) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("insert into user(full_name,user_name,passWord,phone,Role,address) values (?,?,?,?,?,?)")) {
             statement.setString(1, user.getFull_name());
-            statement.setString(2, user.getUser_name());
+            statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getPhone());
             statement.setInt(5, user.getRole());
+            statement.setString(6, user.getAddress());
+
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -86,7 +86,9 @@ public class UserDAOImpl implements IUserDAO {
                 String password = rs.getString("password");
                 String phone = rs.getString("phone");
                 int role = rs.getInt("Role");
-                user = new User(full_name,user_name,password,phone,role);
+                String address = rs.getString("address");
+
+                user = new User(full_name,user_name,password,phone,role,address);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

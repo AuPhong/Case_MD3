@@ -66,6 +66,7 @@ public class AccountServlet extends HttpServlet {
         String pass = request.getParameter("password");
         String rePass = request.getParameter("rePassword");
         String roleString = request.getParameter("role");
+        String address = request.getParameter("address");
         if (roleString.equals("Buyer")) {
             role = 1;
         } else if (roleString.equals("Seller")) {
@@ -83,7 +84,7 @@ public class AccountServlet extends HttpServlet {
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             } else {
                 request.setAttribute("success", "Successful!");
-                userDAO.save(new User(fullName, userName, pass, phone, role));
+                userDAO.save(new User(fullName, userName, pass, phone, role,address));
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             }
         }

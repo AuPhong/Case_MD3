@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Speedyservice
-  Date: 5/20/2022
-  Time: 3:28 PM
+  Date: 5/21/2022
+  Time: 11:27 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -121,7 +121,7 @@
         <div class="row align-items-center">
             <div class="col-md-3">
                 <div class="logo">
-                    <a href="products">
+                    <a href="index.html">
                         <img src="img/logo.png" alt="Logo">
                     </a>
                 </div>
@@ -155,93 +155,155 @@
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Products</a></li>
-            <li class="breadcrumb-item active">Login & Register</li>
+            <li class="breadcrumb-item active">Cart</li>
         </ul>
     </div>
 </div>
 <!-- Breadcrumb End -->
 
-<!-- Login Start -->
-<div class="login">
+<!-- Cart Start -->
+<div class="cart-page">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6">
-                <form action="accounts?action=register" method="post">
-                    <div class="register-form">
-                        <p class="text-danger">${error}${error1}</p>
-                        <p class="text-success">${success}</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Full name</label>
-                                <input class="form-control" type="text" placeholder="Full name" name="fullName">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Email</label>
-                                <input class="form-control" type="email" placeholder="Email" name="userName">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Address</label>
-                                <input class="form-control" type="text" placeholder="Address" name="address">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="Mobile No" name="phone">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Password</label>
-                                <input class="form-control password-field" type="password" placeholder="Password" name="password">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Retype Password</label>
-                                <input class="form-control" type="password" placeholder="Password" name="rePassword">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Role select</label>
-                                <select class="form-control" id="exampleFormControlSelect1" name="role">
-                                    <option>Buyer</option>
-                                    <option>Seller</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Submit</button>
-                            </div>
-
-                        </div>
+            <div class="col-lg-8">
+                <div class="cart-page-inner">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                            <tr>
+                                <td>
+                                    <div class="img">
+                                        <a href="#"><img src="img/product-1.jpg" alt="Image"></a>
+                                        <p>Product Name</p>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td>
+                                    <div class="qty">
+                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <input type="text" value="1">
+                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td><button><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="img">
+                                        <a href="#"><img src="img/product-2.jpg" alt="Image"></a>
+                                        <p>Product Name</p>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td>
+                                    <div class="qty">
+                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <input type="text" value="1">
+                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td><button><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="img">
+                                        <a href="#"><img src="img/product-3.jpg" alt="Image"></a>
+                                        <p>Product Name</p>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td>
+                                    <div class="qty">
+                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <input type="text" value="1">
+                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td><button><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="img">
+                                        <a href="#"><img src="img/product-4.jpg" alt="Image"></a>
+                                        <p>Product Name</p>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td>
+                                    <div class="qty">
+                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <input type="text" value="1">
+                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td><button><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="img">
+                                        <a href="#"><img src="img/product-5.jpg" alt="Image"></a>
+                                        <p>Product Name</p>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td>
+                                    <div class="qty">
+                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                        <input type="text" value="1">
+                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td>$99</td>
+                                <td><button><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </form>
-
+                </div>
             </div>
-            <div class="col-lg-6">
-                <form action="accounts?action=login" method="post">
-                    <p class="text-danger">${mess}</p>
-                    <div class="login-form">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                                <input class="form-control" type="email" name="name" placeholder="Email">
+            <div class="col-lg-4">
+                <div class="cart-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="coupon">
+                                <input type="text" placeholder="Coupon Code">
+                                <button>Apply Code</button>
                             </div>
-                            <div class="col-md-6">
-                                <label>Password</label>
-                                <input class="form-control" type="password" name="pass" placeholder="Password">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="cart-summary">
+                                <div class="cart-content">
+                                    <h1>Cart Summary</h1>
+                                    <p>Sub Total<span>$99</span></p>
+                                    <p>Shipping Cost<span>$1</span></p>
+                                    <h2>Grand Total<span>$100</span></h2>
+                                </div>
+                                <div class="cart-btn">
+                                    <button>Update Cart</button>
+                                    <button>Checkout</button>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <button class="btn">Submit</button>
-                            </div>
                         </div>
                     </div>
-                </form>
-
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Login End -->
+<!-- Cart End -->
 
 <!-- Footer Start -->
 <div class="footer">
@@ -345,3 +407,4 @@
 <script src="js/main.js"></script>
 </body>
 </html>
+

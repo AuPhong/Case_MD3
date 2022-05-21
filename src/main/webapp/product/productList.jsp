@@ -62,38 +62,54 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="home" class="nav-item nav-link">Home</a>
-                    <a href="product-list.html" class="nav-item nav-link active">Products</a>
-                    <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                    <a href="cart.html" class="nav-item nav-link">Cart</a>
-                    <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-                    <a href="my-account.html" class="nav-item nav-link">My Account</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                            <a href="login.html" class="dropdown-item">Login & Register</a>
-                            <a href="contact.html" class="dropdown-item">Contact Us</a>
-                        </div>
-                    </div>
+                    <a href="home" class="nav-item nav-link active">Home</a>
+                    <a href="products" class="nav-item nav-link ">Products</a>
+                    <%--                    <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>--%>
+                    <c:if test="${sessionScope.account.role == 1}">
+                        <a href="/CartServlet" class="nav-item nav-link">Cart</a>
+                        <a href="/CheckoutServlet" class="nav-item nav-link">Checkout</a>
+                    </c:if>
+                    <c:if test="${sessionScope.account.role == 2}">
+                        <a href="/ProductMangerServlet" class="nav-item nav-link">Product manager</a>
+                        <a href="/OrderManagerServlet" class="nav-item nav-link">Orders manager</a>
+                        <%--                        <a href="my-account.html" class="nav-item nav-link">My Account</a>--%>
+                    </c:if>
+                    <c:if test="${sessionScope.account.role == 3}">
+                        <a href="/UserManagementServlet" class="nav-item nav-link">Manage User</a>
+                    </c:if>
+
+                    <%--                    <div class="nav-item dropdown">--%>
+                    <%--                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>--%>
+                    <%--                        <div class="dropdown-menu">--%>
+                    <%--                            <a href="wishlist.html" class="dropdown-item">Wishlist</a>--%>
+                    <%--                            <a href="login.html" class="dropdown-item">Login & Register</a>--%>
+                    <%--                            <a href="contact.html" class="dropdown-item">Contact Us</a>--%>
+                    <%--                        </div>--%>
+                    <%--                    </div>--%>
                 </div>
-                <div class="navbar-nav ml-auto">
-                    <div class="nav-item dropdown">
-                        <div class="dropdown-menu">
-                            <c:if test="${sessionScope.account == null}">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login Or Register</a>
+                <c:if test="${sessionScope.account == null}">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login Or Register</a>
+                            <div class="dropdown-menu">
                                 <a href="accounts" class="dropdown-item">Login</a>
                                 <a href="accounts" class="dropdown-item">Register</a>
-                            </c:if>
-                            <c:if test="${sessionScope.account == null}">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">${sessionScope.account.getFull_name()}</a>
-                                <a href="accounts" class="dropdown-item">My account</a>
-                                <a href="accounts" class="dropdown-item">Logout</a>
-                            </c:if>
+                            </div>
                         </div>
-
                     </div>
-                </div>
+                </c:if>
+                <c:if test="${sessionScope.account != null}">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello ${sessionScope.account.full_name}</a>
+                            <div class="dropdown-menu">
+                                <a href="/MyAccountServlet" class="dropdown-item">My account</a>
+                                <a href="accounts?action=logout" class="dropdown-item">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+
             </div>
         </nav>
     </div>
@@ -123,7 +139,7 @@
                         <i class="fa fa-heart"></i>
                         <span>(0)</span>
                     </a>
-                    <a href="cart.html" class="btn cart">
+                    <a href="/CartServlet" class="btn cart">
                         <i class="fa fa-shopping-cart"></i>
                         <span>(0)</span>
                     </a>
