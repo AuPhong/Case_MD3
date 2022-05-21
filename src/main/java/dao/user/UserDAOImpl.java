@@ -28,11 +28,12 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     public void save(User user) {
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("insert into user(full_name,user_name,passWord,phone) values (?,?,?,?)")) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("insert into user(full_name,user_name,passWord,phone,Role) values (?,?,?,?,?)")) {
             statement.setString(1, user.getFull_name());
             statement.setString(2, user.getUser_name());
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getPhone());
+            statement.setInt(5, user.getRole());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -80,9 +81,12 @@ public class UserDAOImpl implements IUserDAO {
             statement.setString(2, pass);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                String name1 = rs.getString("user_name");
-                String pass1 = rs.getString("password");
-                user = new User(name1, pass1);
+                String full_name = rs.getString("full_name");
+                String user_name = rs.getString("user_name");
+                String password = rs.getString("password");
+                String phone = rs.getString("phone");
+                int role = rs.getInt("Role");
+                user = new User(full_name,user_name,password,phone,role);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -59,11 +59,20 @@ public class AccountServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int role;
         String fullName = request.getParameter("fullName");
         String userName = request.getParameter("userName");
         String phone = request.getParameter("phone");
         String pass = request.getParameter("password");
         String rePass = request.getParameter("rePassword");
+        String roleString = request.getParameter("role");
+        if (roleString.equals("Buyer")){
+            role = 0;
+        } else if (roleString.equals("Seller")){
+            role = 1;
+        } else {
+            role = 0;
+        }
         if (!pass.equals(rePass)) {
             request.setAttribute("error","Retype password not match!");
             request.getRequestDispatcher("account/login.jsp").forward(request, response);
@@ -74,7 +83,7 @@ public class AccountServlet extends HttpServlet {
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             } else {
                 request.setAttribute("success","Successful!");
-                userDAO.save(new User(fullName,userName,pass,phone));
+                userDAO.save(new User(fullName,userName,pass,phone,role));
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             }
         }

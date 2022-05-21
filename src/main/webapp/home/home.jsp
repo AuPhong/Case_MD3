@@ -93,7 +93,7 @@
                 <c:if test="${sessionScope.account != null}">
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account manager ${sessionScope.account.getFull_name()}</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello ${sessionScope.account.full_name}</a>
                             <div class="dropdown-menu">
                                 <a href="accounts" class="dropdown-item">My account</a>
                                 <a href="accounts?action=logout" class="dropdown-item">Logout</a>

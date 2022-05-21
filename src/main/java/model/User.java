@@ -6,7 +6,7 @@ private String full_name;
 private String user_name;
 private String password;
 private String phone;
-private String role;
+private int role;
 
     public User() {
     }
@@ -23,7 +23,7 @@ private String role;
         this.phone = phone;
     }
 
-    public User(int user_id, String full_name, String user_name, String password, String phone, String role) {
+    public User(int user_id, String full_name, String user_name, String password, String phone, int role) {
         this.user_id = user_id;
         this.full_name = full_name;
         this.user_name = user_name;
@@ -32,9 +32,17 @@ private String role;
         this.role = role;
     }
 
-    public User(String user_name, String password, String role) {
+    public User(String user_name, String password, int role) {
         this.user_name = user_name;
         this.password = password;
+        this.role = role;
+    }
+
+    public User(String full_name, String user_name, String password, String phone, int role) {
+        this.full_name = full_name;
+        this.user_name = user_name;
+        this.password = password;
+        this.phone = phone;
         this.role = role;
     }
 
@@ -78,11 +86,11 @@ private String role;
         this.phone = phone;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
