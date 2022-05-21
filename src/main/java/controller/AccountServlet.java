@@ -80,7 +80,7 @@ public class AccountServlet extends HttpServlet {
         } else {
             User user = userDAO.checkRegister(userName);
             if (user != null) {
-                request.setAttribute("error1", "User name is already exist!");
+                request.setAttribute("error1", "This email is already exist!");
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             } else {
                 request.setAttribute("success", "Successful!");

@@ -13,7 +13,7 @@ public class CartDAOImpl implements ICartDAO{
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_thuongmai", "root", "123456");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_thuongmai1", "root", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
