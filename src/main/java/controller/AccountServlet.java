@@ -19,13 +19,21 @@ public class AccountServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
+            case "logout":
+                logout(request,response);
+                break;
             default:
                 showLoginPage(request, response);
                 break;
         }
 
 
+    }
+
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("account");
+        response.sendRedirect("home");
     }
 
 
@@ -83,7 +91,7 @@ public class AccountServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("account", user);
-            response.sendRedirect("products");
+            response.sendRedirect("home");
         }
 
     }

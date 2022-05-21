@@ -15,12 +15,12 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action){
             default:
-                showHomePage(request,response);
+                showProductList(request,response);
                 break;
         }
     }
-    private void showHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("home/productList.jsp").forward(request,response);
+    private void showProductList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("product/productList.jsp").forward(request,response);
     }
 
     @Override

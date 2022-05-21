@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Speedyservice
@@ -60,29 +61,44 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="products" class="nav-item nav-link">Home</a>
+                    <a href="home" class="nav-item nav-link active">Home</a>
+                    <a href="products" class="nav-item nav-link ">Products</a>
                     <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
                     <a href="cart.html" class="nav-item nav-link">Cart</a>
                     <a href="checkout.html" class="nav-item nav-link">Checkout</a>
                     <a href="my-account.html" class="nav-item nav-link">My Account</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">More Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                         <div class="dropdown-menu">
                             <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                            <a href="login.html" class="dropdown-item active">Login & Register</a>
+                            <a href="login.html" class="dropdown-item">Login & Register</a>
                             <a href="contact.html" class="dropdown-item">Contact Us</a>
                         </div>
                     </div>
                 </div>
-                <div class="navbar-nav ml-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Login</a>
-                            <a href="#" class="dropdown-item">Register</a>
+                <c:if test="${sessionScope.account == null}">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login Or Register</a>
+                            <div class="dropdown-menu">
+                                <a href="accounts" class="dropdown-item">Login</a>
+                                <a href="accounts" class="dropdown-item">Register</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:if>
+                <c:if test="${sessionScope.account != null}">
+                    <div class="navbar-nav ml-auto">
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account manager ${sessionScope.account.getFull_name()}</a>
+                            <div class="dropdown-menu">
+                                <a href="accounts" class="dropdown-item">My account</a>
+                                <a href="accounts" class="dropdown-item">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+
             </div>
         </nav>
     </div>

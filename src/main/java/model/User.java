@@ -2,7 +2,7 @@ package model;
 
 public class User {
     private int user_id;
-private  String full_name;
+private String full_name;
 private String user_name;
 private String password;
 private String phone;

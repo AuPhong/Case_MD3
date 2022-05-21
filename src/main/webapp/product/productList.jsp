@@ -20,7 +20,8 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+          rel="stylesheet">
 
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +62,7 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="home" class="nav-item nav-link">Home</a>
                     <a href="product-list.html" class="nav-item nav-link active">Products</a>
                     <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
                     <a href="cart.html" class="nav-item nav-link">Cart</a>
@@ -78,16 +79,19 @@
                 </div>
                 <div class="navbar-nav ml-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                         <div class="dropdown-menu">
                             <c:if test="${sessionScope.account == null}">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login Or Register</a>
                                 <a href="accounts" class="dropdown-item">Login</a>
+                                <a href="accounts" class="dropdown-item">Register</a>
                             </c:if>
-                            <c:if test="${sessionScope.account != null}">
+                            <c:if test="${sessionScope.account == null}">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">${sessionScope.account.getFull_name()}</a>
+                                <a href="accounts" class="dropdown-item">My account</a>
                                 <a href="accounts" class="dropdown-item">Logout</a>
                             </c:if>
-                            <a href="accounts" class="dropdown-item">Register</a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -172,7 +176,8 @@
                                 <div class="col-md-4">
                                     <div class="product-price-range">
                                         <div class="dropdown">
-                                            <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
+                                            <div class="dropdown-toggle" data-toggle="dropdown">Product price range
+                                            </div>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="#" class="dropdown-item">$0 to $50</a>
                                                 <a href="#" class="dropdown-item">$51 to $100</a>
@@ -484,7 +489,8 @@
                                 <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
+                                <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics &
+                                    Accessories</a>
                             </li>
                         </ul>
                     </nav>
@@ -679,15 +685,15 @@
             <div class="col-md-6">
                 <div class="payment-method">
                     <h2>We Accept:</h2>
-                    <img src="img/payment-method.png" alt="Payment Method" />
+                    <img src="img/payment-method.png" alt="Payment Method"/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="payment-security">
                     <h2>Secured By:</h2>
-                    <img src="img/godaddy.svg" alt="Payment Security" />
-                    <img src="img/norton.svg" alt="Payment Security" />
-                    <img src="img/ssl.svg" alt="Payment Security" />
+                    <img src="img/godaddy.svg" alt="Payment Security"/>
+                    <img src="img/norton.svg" alt="Payment Security"/>
+                    <img src="img/ssl.svg" alt="Payment Security"/>
                 </div>
             </div>
         </div>
