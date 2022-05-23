@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Speedyservice
@@ -60,30 +61,45 @@
 
       <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav mr-auto">
-          <a href="index.html" class="nav-item nav-link">Home</a>
-          <a href="product-list.html" class="nav-item nav-link">Products</a>
-          <a href="product-detail.html" class="nav-item nav-link active">Product Detail</a>
-          <a href="cart.html" class="nav-item nav-link">Cart</a>
-          <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-          <a href="my-account.html" class="nav-item nav-link">My Account</a>
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
-            <div class="dropdown-menu">
-              <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-              <a href="login.html" class="dropdown-item">Login & Register</a>
-              <a href="contact.html" class="dropdown-item">Contact Us</a>
+          <a href="home" class="nav-item nav-link active">Home</a>
+          <a href="products" class="nav-item nav-link ">Products</a>
+          <%--                    <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>--%>
+          <c:if test="${sessionScope.account.role == 1}">
+            <a href="/CartServlet" class="nav-item nav-link">Cart</a>
+            <a href="/CheckoutServlet" class="nav-item nav-link">Checkout</a>
+          </c:if>
+          <c:if test="${sessionScope.account.role == 2}">
+            <a href="/ProductMangerServlet" class="nav-item nav-link">Product manager</a>
+            <a href="/OrderManagerServlet" class="nav-item nav-link">Orders manager</a>
+            <%--                        <a href="my-account.html" class="nav-item nav-link">My Account</a>--%>
+          </c:if>
+          <c:if test="${sessionScope.account.role == 3}">
+            <a href="/UserManagementServlet" class="nav-item nav-link">Manage User</a>
+          </c:if>
+        </div>
+        <c:if test="${sessionScope.account == null}">
+          <div class="navbar-nav ml-auto">
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login Or Register</a>
+              <div class="dropdown-menu">
+                <a href="accounts" class="dropdown-item">Login</a>
+                <a href="accounts" class="dropdown-item">Register</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="navbar-nav ml-auto">
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-            <div class="dropdown-menu">
-              <a href="#" class="dropdown-item">Login</a>
-              <a href="#" class="dropdown-item">Register</a>
+        </c:if>
+        <c:if test="${sessionScope.account != null}">
+          <div class="navbar-nav ml-auto">
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello ${sessionScope.account.full_name}</a>
+              <div class="dropdown-menu">
+                <a href="/MyAccountServlet" class="dropdown-item">My account</a>
+                <a href="accounts?action=logout" class="dropdown-item">Logout</a>
+              </div>
             </div>
           </div>
-        </div>
+        </c:if>
+
       </div>
     </nav>
   </div>
@@ -145,25 +161,25 @@
           <div class="row align-items-center">
             <div class="col-md-5">
               <div class="product-slider-single normal-slider">
-                <img src="img/product-1.jpg" alt="Product Image">
-                <img src="img/product-3.jpg" alt="Product Image">
-                <img src="img/product-5.jpg" alt="Product Image">
-                <img src="img/product-7.jpg" alt="Product Image">
-                <img src="img/product-9.jpg" alt="Product Image">
-                <img src="img/product-10.jpg" alt="Product Image">
+                <img src="${detail.productImage}" alt="Product Image">
+<%--                <img src="img/product-3.jpg" alt="Product Image">--%>
+<%--                <img src="img/product-5.jpg" alt="Product Image">--%>
+<%--                <img src="img/product-7.jpg" alt="Product Image">--%>
+<%--                <img src="img/product-9.jpg" alt="Product Image">--%>
+<%--                <img src="img/product-10.jpg" alt="Product Image">--%>
               </div>
-              <div class="product-slider-single-nav normal-slider">
-                <div class="slider-nav-img"><img src="img/product-1.jpg" alt="Product Image"></div>
-                <div class="slider-nav-img"><img src="img/product-3.jpg" alt="Product Image"></div>
-                <div class="slider-nav-img"><img src="img/product-5.jpg" alt="Product Image"></div>
-                <div class="slider-nav-img"><img src="img/product-7.jpg" alt="Product Image"></div>
-                <div class="slider-nav-img"><img src="img/product-9.jpg" alt="Product Image"></div>
-                <div class="slider-nav-img"><img src="img/product-10.jpg" alt="Product Image"></div>
-              </div>
+<%--              <div class="product-slider-single-nav normal-slider">--%>
+<%--                <div class="slider-nav-img"><img src="${detail.productImage}" alt="Product Image"></div>--%>
+<%--&lt;%&ndash;                <div class="slider-nav-img"><img src="img/product-3.jpg" alt="Product Image"></div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                <div class="slider-nav-img"><img src="img/product-5.jpg" alt="Product Image"></div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                <div class="slider-nav-img"><img src="img/product-7.jpg" alt="Product Image"></div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                <div class="slider-nav-img"><img src="img/product-9.jpg" alt="Product Image"></div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                <div class="slider-nav-img"><img src="img/product-10.jpg" alt="Product Image"></div>&ndash;%&gt;--%>
+<%--              </div>--%>
             </div>
             <div class="col-md-7">
               <div class="product-content">
-                <div class="title"><h2>Product Name</h2></div>
+                <div class="title"><h2>${detail.productName}</h2></div>
                 <div class="ratting">
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
@@ -173,7 +189,7 @@
                 </div>
                 <div class="price">
                   <h4>Price:</h4>
-                  <p>$99 <span>$149</span></p>
+                  <p>${detail.productPrice}VND <span>1000000.0VND</span></p>
                 </div>
                 <div class="quantity">
                   <h4>Quantity:</h4>
@@ -227,7 +243,7 @@
               <div id="description" class="container tab-pane active">
                 <h4>Product description</h4>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque. Suspendisse sit amet neque neque. Praesent suscipit et magna eu iaculis. Donec arcu libero, commodo ac est a, malesuada finibus dolor. Aenean in ex eu velit semper fermentum. In leo dui, aliquet sit amet eleifend sit amet, varius in turpis. Maecenas fermentum ut ligula at consectetur. Nullam et tortor leo.
+                      ${detail.productDescription};
                 </p>
               </div>
               <div id="specification" class="container tab-pane fade">
@@ -289,146 +305,149 @@
           </div>
 
           <div class="row align-items-center product-slider product-slider-3">
-            <div class="col-lg-3">
-              <div class="product-item">
-                <div class="product-title">
-                  <a href="#">Product Name</a>
-                  <div class="ratting">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+            <c:forEach items="${productByCID}" var="o">
+              <div class="col-lg-3">
+                <div class="product-item">
+                  <div class="product-title">
+                    <a href="#">${o.productName}</a>
+                    <div class="ratting">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
                   </div>
-                </div>
-                <div class="product-image">
-                  <a href="product-detail.html">
-                    <img src="img/product-10.jpg" alt="Product Image">
-                  </a>
-                  <div class="product-action">
-                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="#"><i class="fa fa-search"></i></a>
+                  <div class="product-image">
+                    <a href="product-detail.html">
+                      <img src="${o.productImage}" alt="Product Image">
+                    </a>
+                    <div class="product-action">
+                      <a href="#"><i class="fa fa-cart-plus"></i></a>
+                      <a href="#"><i class="fa fa-heart"></i></a>
+                      <a href="#"><i class="fa fa-search"></i></a>
+                    </div>
                   </div>
-                </div>
-                <div class="product-price">
-                  <h3><span>$</span>99</h3>
-                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                  <div class="product-price">
+                    <h3>${o.productPrice} <span>VND</span></h3>
+                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-3">
-              <div class="product-item">
-                <div class="product-title">
-                  <a href="#">Product Name</a>
-                  <div class="ratting">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                </div>
-                <div class="product-image">
-                  <a href="product-detail.html">
-                    <img src="img/product-8.jpg" alt="Product Image">
-                  </a>
-                  <div class="product-action">
-                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="#"><i class="fa fa-search"></i></a>
-                  </div>
-                </div>
-                <div class="product-price">
-                  <h3><span>$</span>99</h3>
-                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3">
-              <div class="product-item">
-                <div class="product-title">
-                  <a href="#">Product Name</a>
-                  <div class="ratting">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                </div>
-                <div class="product-image">
-                  <a href="product-detail.html">
-                    <img src="img/product-6.jpg" alt="Product Image">
-                  </a>
-                  <div class="product-action">
-                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="#"><i class="fa fa-search"></i></a>
-                  </div>
-                </div>
-                <div class="product-price">
-                  <h3><span>$</span>99</h3>
-                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3">
-              <div class="product-item">
-                <div class="product-title">
-                  <a href="#">Product Name</a>
-                  <div class="ratting">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                </div>
-                <div class="product-image">
-                  <a href="product-detail.html">
-                    <img src="img/product-4.jpg" alt="Product Image">
-                  </a>
-                  <div class="product-action">
-                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="#"><i class="fa fa-search"></i></a>
-                  </div>
-                </div>
-                <div class="product-price">
-                  <h3><span>$</span>99</h3>
-                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3">
-              <div class="product-item">
-                <div class="product-title">
-                  <a href="#">Product Name</a>
-                  <div class="ratting">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
-                </div>
-                <div class="product-image">
-                  <a href="product-detail.html">
-                    <img src="img/product-2.jpg" alt="Product Image">
-                  </a>
-                  <div class="product-action">
-                    <a href="#"><i class="fa fa-cart-plus"></i></a>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="#"><i class="fa fa-search"></i></a>
-                  </div>
-                </div>
-                <div class="product-price">
-                  <h3><span>$</span>99</h3>
-                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-              </div>
-            </div>
+            </c:forEach>
+
+<%--            <div class="col-lg-3">--%>
+<%--              <div class="product-item">--%>
+<%--                <div class="product-title">--%>
+<%--                  <a href="#">Product Name</a>--%>
+<%--                  <div class="ratting">--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-image">--%>
+<%--                  <a href="product-detail.html">--%>
+<%--                    <img src="img/product-8.jpg" alt="Product Image">--%>
+<%--                  </a>--%>
+<%--                  <div class="product-action">--%>
+<%--                    <a href="#"><i class="fa fa-cart-plus"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-heart"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-search"></i></a>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-price">--%>
+<%--                  <h3><span>$</span>99</h3>--%>
+<%--                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-3">--%>
+<%--              <div class="product-item">--%>
+<%--                <div class="product-title">--%>
+<%--                  <a href="#">Product Name</a>--%>
+<%--                  <div class="ratting">--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-image">--%>
+<%--                  <a href="product-detail.html">--%>
+<%--                    <img src="img/product-6.jpg" alt="Product Image">--%>
+<%--                  </a>--%>
+<%--                  <div class="product-action">--%>
+<%--                    <a href="#"><i class="fa fa-cart-plus"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-heart"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-search"></i></a>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-price">--%>
+<%--                  <h3><span>$</span>99</h3>--%>
+<%--                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-3">--%>
+<%--              <div class="product-item">--%>
+<%--                <div class="product-title">--%>
+<%--                  <a href="#">Product Name</a>--%>
+<%--                  <div class="ratting">--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-image">--%>
+<%--                  <a href="product-detail.html">--%>
+<%--                    <img src="img/product-4.jpg" alt="Product Image">--%>
+<%--                  </a>--%>
+<%--                  <div class="product-action">--%>
+<%--                    <a href="#"><i class="fa fa-cart-plus"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-heart"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-search"></i></a>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-price">--%>
+<%--                  <h3><span>$</span>99</h3>--%>
+<%--                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-3">--%>
+<%--              <div class="product-item">--%>
+<%--                <div class="product-title">--%>
+<%--                  <a href="#">Product Name</a>--%>
+<%--                  <div class="ratting">--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                    <i class="fa fa-star"></i>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-image">--%>
+<%--                  <a href="product-detail.html">--%>
+<%--                    <img src="img/product-2.jpg" alt="Product Image">--%>
+<%--                  </a>--%>
+<%--                  <div class="product-action">--%>
+<%--                    <a href="#"><i class="fa fa-cart-plus"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-heart"></i></a>--%>
+<%--                    <a href="#"><i class="fa fa-search"></i></a>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-price">--%>
+<%--                  <h3><span>$</span>99</h3>--%>
+<%--                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
           </div>
         </div>
       </div>
@@ -439,119 +458,112 @@
           <h2 class="title">Category</h2>
           <nav class="navbar bg-light">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
-              </li>
+              <c:forEach items="${categoryList}" var="o">
+                <li class="nav-item">
+                  <a class="nav-link" href="/categorys?action=cateID&categoryId=${o.categoryId}"><i class="fa fa-male"></i>${o.cateName}</a>
+                </li>
+              </c:forEach>
             </ul>
           </nav>
         </div>
 
         <div class="sidebar-widget widget-slider">
           <div class="sidebar-slider normal-slider">
-            <div class="product-item">
-              <div class="product-title">
-                <a href="#">Product Name</a>
-                <div class="ratting">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
+            <c:forEach items="${topProduct}" var="o">
+              <div class="product-item">
+                <div class="product-title">
+                  <a href="#">${o.productName}</a>
+                  <div class="ratting">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                </div>
+                <div class="product-image">
+                  <a href="product-detail.html">
+                    <img src="${o.productImage}" alt="Product Image">
+                  </a>
+                  <div class="product-action">
+                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                    <a href="#"><i class="fa fa-heart"></i></a>
+                    <a href="#"><i class="fa fa-search"></i></a>
+                  </div>
+                </div>
+                <div class="product-price">
+                  <h3>${o.productPrice} <span>VND</span></h3>
+                  <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                 </div>
               </div>
-              <div class="product-image">
-                <a href="product-detail.html">
-                  <img src="img/product-7.jpg" alt="Product Image">
-                </a>
-                <div class="product-action">
-                  <a href="#"><i class="fa fa-cart-plus"></i></a>
-                  <a href="#"><i class="fa fa-heart"></i></a>
-                  <a href="#"><i class="fa fa-search"></i></a>
-                </div>
-              </div>
-              <div class="product-price">
-                <h3><span>$</span>99</h3>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-              </div>
+            </c:forEach>
             </div>
-            <div class="product-item">
-              <div class="product-title">
-                <a href="#">Product Name</a>
-                <div class="ratting">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <div class="product-image">
-                <a href="product-detail.html">
-                  <img src="img/product-8.jpg" alt="Product Image">
-                </a>
-                <div class="product-action">
-                  <a href="#"><i class="fa fa-cart-plus"></i></a>
-                  <a href="#"><i class="fa fa-heart"></i></a>
-                  <a href="#"><i class="fa fa-search"></i></a>
-                </div>
-              </div>
-              <div class="product-price">
-                <h3><span>$</span>99</h3>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-              </div>
-            </div>
-            <div class="product-item">
-              <div class="product-title">
-                <a href="#">Product Name</a>
-                <div class="ratting">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <div class="product-image">
-                <a href="product-detail.html">
-                  <img src="img/product-9.jpg" alt="Product Image">
-                </a>
-                <div class="product-action">
-                  <a href="#"><i class="fa fa-cart-plus"></i></a>
-                  <a href="#"><i class="fa fa-heart"></i></a>
-                  <a href="#"><i class="fa fa-search"></i></a>
-                </div>
-              </div>
-              <div class="product-price">
-                <h3><span>$</span>99</h3>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-              </div>
-            </div>
+<%--            <div class="product-item">--%>
+<%--              <div class="product-title">--%>
+<%--                <a href="#">Product Name</a>--%>
+<%--                <div class="ratting">--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="product-image">--%>
+<%--                <a href="product-detail.html">--%>
+<%--                  <img src="img/product-8.jpg" alt="Product Image">--%>
+<%--                </a>--%>
+<%--                <div class="product-action">--%>
+<%--                  <a href="#"><i class="fa fa-cart-plus"></i></a>--%>
+<%--                  <a href="#"><i class="fa fa-heart"></i></a>--%>
+<%--                  <a href="#"><i class="fa fa-search"></i></a>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="product-price">--%>
+<%--                <h3><span>$</span>99</h3>--%>
+<%--                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="product-item">--%>
+<%--              <div class="product-title">--%>
+<%--                <a href="#">Product Name</a>--%>
+<%--                <div class="ratting">--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                  <i class="fa fa-star"></i>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="product-image">--%>
+<%--                <a href="product-detail.html">--%>
+<%--                  <img src="img/product-9.jpg" alt="Product Image">--%>
+<%--                </a>--%>
+<%--                <div class="product-action">--%>
+<%--                  <a href="#"><i class="fa fa-cart-plus"></i></a>--%>
+<%--                  <a href="#"><i class="fa fa-heart"></i></a>--%>
+<%--                  <a href="#"><i class="fa fa-search"></i></a>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="product-price">--%>
+<%--                <h3><span>$</span>99</h3>--%>
+<%--                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+<%--              </div>--%>
+<%--            </div>--%>
           </div>
         </div>
 
-        <div class="sidebar-widget brands">
-          <h2 class="title">Our Brands</h2>
-          <ul>
-            <li><a href="#">Nulla </a><span>(45)</span></li>
-            <li><a href="#">Curabitur </a><span>(34)</span></li>
-            <li><a href="#">Nunc </a><span>(67)</span></li>
-            <li><a href="#">Ullamcorper</a><span>(74)</span></li>
-            <li><a href="#">Fusce </a><span>(89)</span></li>
-            <li><a href="#">Sagittis</a><span>(28)</span></li>
-          </ul>
-        </div>
+<%--        <div class="sidebar-widget brands">--%>
+<%--          <h2 class="title">Our Brands</h2>--%>
+<%--          <ul>--%>
+<%--            <li><a href="#">Nulla </a><span>(45)</span></li>--%>
+<%--            <li><a href="#">Curabitur </a><span>(34)</span></li>--%>
+<%--            <li><a href="#">Nunc </a><span>(67)</span></li>--%>
+<%--            <li><a href="#">Ullamcorper</a><span>(74)</span></li>--%>
+<%--            <li><a href="#">Fusce </a><span>(89)</span></li>--%>
+<%--            <li><a href="#">Sagittis</a><span>(28)</span></li>--%>
+<%--          </ul>--%>
+<%--        </div>--%>
 
         <div class="sidebar-widget tag">
           <h2 class="title">Tags Cloud</h2>
