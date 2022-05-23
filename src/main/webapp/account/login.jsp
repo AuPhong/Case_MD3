@@ -195,7 +195,7 @@
                                 <label>Retype Password</label>
                                 <input class="form-control" type="password" placeholder="Password" name="rePassword">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-12">
                                 <label for="exampleFormControlSelect1">Role select</label>
                                 <select class="form-control" id="exampleFormControlSelect1" name="role">
                                     <option>Buyer</option>

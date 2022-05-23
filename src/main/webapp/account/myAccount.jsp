@@ -20,7 +20,8 @@
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+          rel="stylesheet">
 
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -100,7 +101,8 @@
                 <c:if test="${sessionScope.account != null}">
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello ${sessionScope.account.full_name}</a>
+                            <a href="#" class="nav-link dropdown-toggle"
+                               data-toggle="dropdown">Hello ${sessionScope.account.full_name}</a>
                             <div class="dropdown-menu">
                                 <a href="/MyAccountServlet" class="dropdown-item">My account</a>
                                 <a href="accounts?action=logout" class="dropdown-item">Logout</a>
@@ -167,21 +169,98 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                    <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-                    <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
-                    <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
-                    <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
-                    <a class="nav-link" href="index.html"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                    <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i
+                            class="fa fa-user"></i>Account Details</a>
+                    <%--                    <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>--%>
+                    <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i
+                            class="fa fa-shopping-bag"></i>Orders</a>
+                    <%--                    <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>--%>
+                    <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i
+                            class="fa fa-map-marker-alt"></i>address</a>
+                    <a class="nav-link" href="accounts?action=logout"><i class="fa fa-sign-out-alt"></i>Logout</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
-                        <h4>Dashboard</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
-                        </p>
+                    <%--                    <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">--%>
+                    <%--                        <h4>Dashboard</h4>--%>
+                    <%--                        <p>--%>
+                    <%--                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.--%>
+                    <%--                        </p>--%>
+                    <%--                    </div>--%>
+
+                    <div class="tab-pane fade show active" id="account-tab" role="tabpanel"
+                         aria-labelledby="account-nav">
+                        <form action="accounts?action=editRole" method="post">
+                            <h4>Account Details</h4>
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <input class="form-control" readonly type="text"
+                                               placeholder="Full name: ${sessionScope.account.full_name}">
+                                    </div>
+                                    <%--                            <div class="col-md-6">--%>
+                                    <%--                                <input class="form-control" type="text" placeholder="Last Name">--%>
+                                    <%--                            </div>--%>
+                                    <div class="col-md-6">
+                                        <input class="form-control" readonly type="text"
+                                               placeholder="Phone: ${sessionScope.account.phone}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" readonly
+                                               placeholder="Email: ${sessionScope.account.email}">
+                                    </div>
+                                    <%--                            <div class="col-md-12">--%>
+                                    <%--                                <input class="form-control" type="text" placeholder="${sessionScope.account.address}">--%>
+                                    <%--                            </div>--%>
+                                    <c:if test="${sessionScope.account.role==1}">
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleFormControlSelect1">Role select</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="role">
+                                                <option ${sessionScope.account.role==1? "selected":""}>Buyer</option>
+                                                <option ${sessionScope.account.role==2? "selected":""}>Seller</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn">Update Account</button>
+                                            <br><br>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${sessionScope.account.role==2}">
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleFormControlSelect1">Role select</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="role">
+                                                <option ${sessionScope.account.role==1? "selected":""}>Buyer</option>
+                                                <option ${sessionScope.account.role==2? "selected":""}>Seller</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn">Update Account</button>
+                                            <br><br>
+                                        </div>
+                                    </c:if>
+
+
+                                </div>
+                            </form>
+                            <form action="">
+                                <h4>Password change</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="form-control" type="password" placeholder="Current Password">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" placeholder="New Password">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="text" placeholder="Confirm Password">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
                     </div>
                     <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
                         <div class="table-responsive">
@@ -203,7 +282,9 @@
                                     <td>01 Jan 2020</td>
                                     <td>$99</td>
                                     <td>Approved</td>
-                                    <td><button class="btn">View</button></td>
+                                    <td>
+                                        <button class="btn">View</button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -211,7 +292,9 @@
                                     <td>01 Jan 2020</td>
                                     <td>$99</td>
                                     <td>Approved</td>
-                                    <td><button class="btn">View</button></td>
+                                    <td>
+                                        <button class="btn">View</button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
@@ -219,18 +302,20 @@
                                     <td>01 Jan 2020</td>
                                     <td>$99</td>
                                     <td>Approved</td>
-                                    <td><button class="btn">View</button></td>
+                                    <td>
+                                        <button class="btn">View</button>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                        <h4>Payment Method</h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
-                        </p>
-                    </div>
+                    <%--                    <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">--%>
+                    <%--                        <h4>Payment Method</h4>--%>
+                    <%--                        <p>--%>
+                    <%--                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.--%>
+                    <%--                        </p>--%>
+                    <%--                    </div>--%>
                     <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                         <h4>Address</h4>
                         <div class="row">
@@ -248,45 +333,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
-                        <h4>Account Details</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="First Name">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Last Name">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Mobile">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Email">
-                            </div>
-                            <div class="col-md-12">
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Update Account</button>
-                                <br><br>
-                            </div>
-                        </div>
-                        <h4>Password change</h4>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input class="form-control" type="password" placeholder="Current Password">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="New Password">
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" type="text" placeholder="Confirm Password">
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn">Save Changes</button>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -351,15 +398,15 @@
             <div class="col-md-6">
                 <div class="payment-method">
                     <h2>We Accept:</h2>
-                    <img src="img/payment-method.png" alt="Payment Method" />
+                    <img src="img/payment-method.png" alt="Payment Method"/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="payment-security">
                     <h2>Secured By:</h2>
-                    <img src="img/godaddy.svg" alt="Payment Security" />
-                    <img src="img/norton.svg" alt="Payment Security" />
-                    <img src="img/ssl.svg" alt="Payment Security" />
+                    <img src="img/godaddy.svg" alt="Payment Security"/>
+                    <img src="img/norton.svg" alt="Payment Security"/>
+                    <img src="img/ssl.svg" alt="Payment Security"/>
                 </div>
             </div>
         </div>

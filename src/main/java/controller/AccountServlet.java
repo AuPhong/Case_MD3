@@ -55,6 +55,18 @@ public class AccountServlet extends HttpServlet {
             case "register":
                 register(request, response);
                 break;
+            case "editRole":
+                editRole(request,response);
+                break;
+        }
+    }
+
+    private void editRole(HttpServletRequest request, HttpServletResponse response) {
+        String roleName = request.getParameter("role");
+        int id =
+        int role;
+        if (roleName.equals("Buyer")){
+
         }
     }
 
@@ -84,8 +96,16 @@ public class AccountServlet extends HttpServlet {
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
             } else {
                 request.setAttribute("success", "Successful!");
-                userDAO.save(new User(fullName, userName, pass, phone, role,address));
+                userDAO.save(new User(fullName, userName, pass, phone, role, address));
                 request.getRequestDispatcher("account/login.jsp").forward(request, response);
+//                String email = user.getEmail();
+                User userSave = userDAO.findByEmail(userName);
+                if (userSave.getRole() == 1) {
+                    userDAO.saveBuyer(userSave);
+                } else if (userSave.getRole() == 2) {
+                    userDAO.saveSeller(userSave);
+                }
+
             }
         }
     }
