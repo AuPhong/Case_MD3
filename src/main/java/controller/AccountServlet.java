@@ -56,18 +56,22 @@ public class AccountServlet extends HttpServlet {
                 register(request, response);
                 break;
             case "editRole":
-                editRole(request,response);
+                editRole(request, response);
                 break;
         }
     }
 
-    private void editRole(HttpServletRequest request, HttpServletResponse response) {
+    private void editRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String roleName = request.getParameter("role");
-        int id;
-        int role;
-        if (roleName.equals("Buyer")){
-
+        int id = Integer.parseInt(request.getParameter("editId"));
+        int role=1;
+        if (roleName.equals("Buyer")) {
+            role = 1;
+        } else if(roleName.equals("Seller")){
+            role = 2;
         }
+        userDAO.editRole(id,role);
+        response.sendRedirect("accounts");
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

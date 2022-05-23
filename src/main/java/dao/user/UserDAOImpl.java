@@ -10,7 +10,7 @@ public class UserDAOImpl implements IUserDAO {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_thuongmai1", "root", "123456");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_commerce", "root", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -99,7 +99,8 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     public void editRole(int id, int role) {
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update user where user_id=? set Role=?")) {
+        System.out.println("Edit role");
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update user set Role=? where user_id=? ")) {
             statement.setInt(1,id);
             statement.setInt(2,role);
             statement.executeUpdate();
@@ -144,6 +145,7 @@ public class UserDAOImpl implements IUserDAO {
             statement.setString(2, pass);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("user_id");
                 String full_name = rs.getString("full_name");
                 String user_name = rs.getString("email");
                 String password = rs.getString("password");
@@ -151,7 +153,7 @@ public class UserDAOImpl implements IUserDAO {
                 int role = rs.getInt("Role");
                 String address = rs.getString("address");
 
-                user = new User(full_name, user_name, password, phone, role, address);
+                user = new User(id,full_name, user_name, password, phone, role, address);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
