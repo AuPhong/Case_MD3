@@ -63,7 +63,7 @@ public class AccountServlet extends HttpServlet {
 
     private void editRole(HttpServletRequest request, HttpServletResponse response) {
         String roleName = request.getParameter("role");
-        int id =
+        int id;
         int role;
         if (roleName.equals("Buyer")){
 
