@@ -32,20 +32,20 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("listProduct",productList);
         request.setAttribute("categoryList",categoryList);
         request.setAttribute("topProduct",topProduct);
-        int count = productDAO.getTotalProduct();
-        int endPage = count/6;
-        if(count%6 != 0) {
-            endPage ++;
-        }
-        String indexPage = request.getParameter("index");
-        if (indexPage == null) {
-            indexPage = "1";
-        }
-        int index = Integer.parseInt(indexPage);
-        List<Product> list = productDAO.pagingProduct(index);
-        request.setAttribute("listA",list);
-        request.setAttribute("endPage",endPage);
-        request.setAttribute("tag",indexPage);
+//        int count = productDAO.getTotalProduct();
+//        int endPage = count/6;
+//        if(count%6 != 0) {
+//            endPage ++;
+//        }
+//        String indexPage = request.getParameter("index");
+//        if (indexPage == null) {
+//            indexPage = "1";
+//        }
+//        int index = Integer.parseInt(indexPage);
+//        List<Product> list = productDAO.pagingProduct(index);
+//        request.setAttribute("listA",list);
+//        request.setAttribute("endPage",endPage);
+//        request.setAttribute("tag",indexPage);
         request.getRequestDispatcher("product/productList.jsp").forward(request,response);
     }
 
