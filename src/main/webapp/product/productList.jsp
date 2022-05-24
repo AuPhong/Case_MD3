@@ -233,7 +233,7 @@
                                         <img src="${o.productImage}" alt="Product Image">
                                     </a>
                                     <div class="product-action">
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                        <a href="CartServlet?action=insert&productId=${o.productId}&session=${sessionScope.account.user_id}"><i class="fa fa-cart-plus"></i></a>
                                         <a href="#"><i class="fa fa-heart"></i></a>
                                         <a href="#"><i class="fa fa-search"></i></a>
                                     </div>

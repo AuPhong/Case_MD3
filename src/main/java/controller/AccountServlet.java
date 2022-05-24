@@ -58,20 +58,37 @@ public class AccountServlet extends HttpServlet {
             case "editRole":
                 editRole(request, response);
                 break;
+            case "editPassword":
+                editPassword(request, response);
+                break;
         }
     }
 
-    private void editRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String roleName = request.getParameter("role");
-        int id = Integer.parseInt(request.getParameter("editId"));
-        int role=1;
-        if (roleName.equals("Buyer")) {
-            role = 1;
-        } else if(roleName.equals("Seller")){
-            role = 2;
+    private void editPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        System.out.println("intotp sfaejjjjjjjjjjjjjjjj");
+        String userPass = request.getParameter("userPass");
+        String currentPassword = request.getParameter("currentPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+        int userId = Integer.parseInt(request.getParameter("editIdPass"));
+        String newPassword = request.getParameter("newPassword");
+        if (!currentPassword.equals(userPass)){
+            request.setAttribute("mess","Wrong current password");
+//            request.getRequestDispatcher("/MyAccountServlet").forward(request,response);
+            response.sendRedirect("/MyAccountServlet");
+        } else if (!newPassword.equals(confirmPassword)){
+            response.sendRedirect("/MyAccountServlet");
+        } else {
+            userDAO.editPassword(userId,newPassword);
+            response.sendRedirect("accounts?action=logout");
         }
-        userDAO.editRole(id,role);
-        response.sendRedirect("accounts");
+
+    }
+
+    private void editRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int role = Integer.parseInt(request.getParameter("role"));
+        int id = Integer.parseInt(request.getParameter("editId"));
+        userDAO.editRole(id, role);
+        response.sendRedirect("home");
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

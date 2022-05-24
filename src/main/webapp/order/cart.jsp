@@ -179,96 +179,31 @@
                             </tr>
                             </thead>
                             <tbody class="align-middle">
-                            <tr>
-                                <td>
-                                    <div class="img">
-                                        <a href="#"><img src="img/product-1.jpg" alt="Image"></a>
-                                        <p>Product Name</p>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td>
-                                    <div class="qty">
-                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
-                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td><button><i class="fa fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="img">
-                                        <a href="#"><img src="img/product-2.jpg" alt="Image"></a>
-                                        <p>Product Name</p>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td>
-                                    <div class="qty">
-                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
-                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td><button><i class="fa fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="img">
-                                        <a href="#"><img src="img/product-3.jpg" alt="Image"></a>
-                                        <p>Product Name</p>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td>
-                                    <div class="qty">
-                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
-                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td><button><i class="fa fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="img">
-                                        <a href="#"><img src="img/product-4.jpg" alt="Image"></a>
-                                        <p>Product Name</p>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td>
-                                    <div class="qty">
-                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
-                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td><button><i class="fa fa-trash"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="img">
-                                        <a href="#"><img src="img/product-5.jpg" alt="Image"></a>
-                                        <p>Product Name</p>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td>
-                                    <div class="qty">
-                                        <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                        <input type="text" value="1">
-                                        <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                </td>
-                                <td>$99</td>
-                                <td><button><i class="fa fa-trash"></i></button></td>
-                            </tr>
+                            <c:forEach items="${cartList}" var="cart" >
+                                <tr>
+                                    <td>
+                                        <div class="img">
+                                            <a href="#"><img src="${cart.productImage}" alt="Image"></a>
+                                            <p>${cart.productName}</p>
+                                        </div>
+                                    </td>
+                                    <td>${cart.productPrice}</td>
+<%--                                    <td><input type="number" value="${cart.productPrice}" id="price"></td>--%>
+                                    <td>
+                                        <div class="qty">
+                                            <button class="btn-minus" id="up"><i class="fa fa-minus"></i></button>
+                                            <input type="text" value="${cart.quantity}" id="quantity" >
+<%--                                            <input type="text" value="${cart.quantity}" id="quantity" >--%>
+                                            <button class="btn-plus" id="down"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>${cart.priceTotal}</td>
+<%--                                    <td><input type="number"  value="${cart.priceTotal}" id="totalPrice"></td>--%>
+                                    <td><button><i class="fa fa-trash"></i></button></td>
+                                </tr>
+                            </c:forEach>
+
+
                             </tbody>
                         </table>
                     </div>
@@ -287,13 +222,13 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>Cart Summary</h1>
-                                    <p>Sub Total<span>$99</span></p>
+                                    <p>Sub Total<span>${subTotal}</span></p>
                                     <p>Shipping Cost<span>$1</span></p>
-                                    <h2>Grand Total<span>$100</span></h2>
+                                    <h2>Grand Total<span>${subTotal + 1}</span></h2>
                                 </div>
                                 <div class="cart-btn">
                                     <button>Update Cart</button>
-                                    <button>Checkout</button>
+                                    <a href="CheckoutServlet"><button>Checkout</button></a>
                                 </div>
                             </div>
                         </div>
@@ -408,3 +343,16 @@
 </body>
 </html>
 
+<script>
+    let price = document.getElementById("price");
+    let quantity = document.getElementById("quantity");
+    let totalPrice = document.getElementById("totalPrice");
+    let up = document.getElementById("up");
+    let down = document.getElementById("down");
+    up.onclick = function (event){
+        totalPrice.value += price;
+    }
+    down.onclick = function (event1){
+        totalPrice.value -= price;
+    }
+</script>

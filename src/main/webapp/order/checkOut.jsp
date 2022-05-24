@@ -171,57 +171,20 @@
                         <h2>Billing Address</h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>First Name</label>
-                                <input class="form-control" type="text" placeholder="First Name">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Last Name"</label>
-                                <input class="form-control" type="text" placeholder="Last Name">
+                                <label>Full Name</label>
+                                <input value="${user.full_name}" class="form-control" type="text" placeholder="Full Name">
                             </div>
                             <div class="col-md-6">
                                 <label>E-mail</label>
-                                <input class="form-control" type="text" placeholder="E-mail">
+                                <input value="${user.email}" class="form-control" type="text" placeholder="E-mail">
                             </div>
                             <div class="col-md-6">
-                                <label>Mobile No</label>
-                                <input class="form-control" type="text" placeholder="Mobile No">
+                                <label>Phone</label>
+                                <input value="${user.phone}" class="form-control" type="text" placeholder="Phone">
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label>Address</label>
-                                <input class="form-control" type="text" placeholder="Address">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Country</label>
-                                <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>City</label>
-                                <input class="form-control" type="text" placeholder="City">
-                            </div>
-                            <div class="col-md-6">
-                                <label>State</label>
-                                <input class="form-control" type="text" placeholder="State">
-                            </div>
-                            <div class="col-md-6">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" placeholder="ZIP Code">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Create an account</label>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="shipto">
-                                    <label class="custom-control-label" for="shipto">Ship to different address</label>
-                                </div>
+                                <input value="${user.address}" class="form-control" type="text" placeholder="Address">
                             </div>
                         </div>
                     </div>
@@ -278,10 +241,12 @@
                 <div class="checkout-inner">
                     <div class="checkout-summary">
                         <h1>Cart Total</h1>
-                        <p>Product Name<span>$99</span></p>
-                        <p class="sub-total">Sub Total<span>$99</span></p>
+                        <c:forEach items="${cartList}" var="cart">
+                            <p>${cart.productName}<span>${cart.priceTotal}</span></p>
+                        </c:forEach>
+                        <p class="sub-total">Sub Total<span>${subTotal}</span></p>
                         <p class="ship-cost">Shipping Cost<span>$1</span></p>
-                        <h2>Grand Total<span>$100</span></h2>
+                        <h2>Grand Total<span>${subTotal + 1}</span></h2>
                     </div>
 
                     <div class="checkout-payment">
@@ -344,7 +309,7 @@
                             </div>
                         </div>
                         <div class="checkout-btn">
-                            <button>Place Order</button>
+                            <a href="CheckoutServlet?action=insertOrder"><button>Place Order</button></a>
                         </div>
                     </div>
                 </div>

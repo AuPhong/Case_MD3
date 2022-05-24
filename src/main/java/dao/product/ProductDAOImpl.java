@@ -64,8 +64,30 @@ public class ProductDAOImpl implements IProductDAO{
     }
 
     @Override
-    public Product findById(int id) {
-        return null;
+    public Product findById(int idSearch) {
+        Product product = null;
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement("select * from product where product_id=?;")
+        ) {
+            statement.setInt(1,idSearch);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                String productName = rs.getString("product_name");
+                double productPrice = rs.getDouble("product_price");
+                String productImage = rs.getString("product_image");
+                String productDescription = rs.getString("description");
+                int  quantityProduct = rs.getInt("quantity");
+                int categoryId = rs.getInt("category_id");
+                int sellerId = rs.getInt("seller_id");
+                product = new Product(productId,productName,productPrice,productImage,productDescription,quantityProduct,categoryId,sellerId);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 
     @Override
