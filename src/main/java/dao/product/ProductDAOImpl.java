@@ -228,6 +228,71 @@ public class ProductDAOImpl implements IProductDAO{
         return list;
     }
 
+    public List<Product> getProductBySellID(int id) {
+        List<Product> productBySellID = new ArrayList<>();
+        String query = "select * from product\n" +
+                "where seller_id = ?;";
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement =connection.prepareStatement(query);
+        ) {
+            statement.setInt(1,id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                String productName = rs.getString("product_name");
+                Double productPrice = rs.getDouble("product_price");
+                String productImage = rs.getString("product_image");
+                String productDescription = rs.getString("description");
+                int  quantityProduct = rs.getInt("quantity");
+
+                productBySellID.add(new Product(productId,productName,productPrice,productImage,productDescription,quantityProduct));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productBySellID;
+    }
+
+    public void deleteProductById (String productId) {
+        String query = "delete from product where product_id = ?;";
+        try (
+                Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(query);
+                ){
+            statement.setString(1,productId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editProductByID(String name,String price,String image,String description,String quantity,String cid,String pid) {
+        String query = "update product\n" +
+                "set product_name = ?,\n" +
+                "product_price = ?,\n" +
+                "product_image = ?,\n" +
+                "description = ?,\n" +
+                "quantity = ?,\n" +
+                "category_id = ?\n" +
+                "where product_id = ?;";
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(query);
+                ) {
+            statement.setString(1,name);
+            statement.setString(2,price);
+            statement.setString(3,image);
+            statement.setString(4,description);
+            statement.setString(5,quantity);
+            statement.setString(6,cid);
+            statement.setString(7,pid);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         ProductDAOImpl productDAO = new ProductDAOImpl();
         List<Product> list = productDAO.pagingProduct(1);

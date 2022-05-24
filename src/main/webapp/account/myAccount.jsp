@@ -211,15 +211,24 @@
                                         <input class="form-control" type="text" readonly
                                                placeholder="Email: ${sessionScope.account.email}">
                                     </div>
-                                    <%--                            <div class="col-md-12">--%>
-                                    <%--                                <input class="form-control" type="text" placeholder="${sessionScope.account.address}">--%>
-                                    <%--                            </div>--%>
+                                    <div class="form-group col-md-12" hidden>
+                                        <label for="exampleFormControlSelect1">Role select</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="editId">
+                                            <option  selected>${sessionScope.account.user_id}</option>
+                                        </select>
+                                    </div>
                                     <c:if test="${sessionScope.account.role==1}">
                                         <div class="form-group col-md-12">
                                             <label for="exampleFormControlSelect1">Role select</label>
                                             <select class="form-control" id="exampleFormControlSelect1" name="role">
-                                                <option ${sessionScope.account.role==1? "selected":""}>Buyer</option>
-                                                <option ${sessionScope.account.role==2? "selected":""}>Seller</option>
+                                                <option value="${sessionScope.account.role==1? "selected":""}" >Buyer</option>
+                                                <option value="${sessionScope.account.role==2? "selected":""}" >Seller</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12" hidden>
+                                            <label for="exampleFormControlSelect1">Role select</label>
+                                            <select class="form-control" id="exampleFormControlSelect1" name="editId">
+                                                <option  selected>${sessionScope.account.user_id}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-12">
@@ -235,6 +244,10 @@
                                                 <option ${sessionScope.account.role==2? "selected":""}>Seller</option>
                                             </select>
                                         </div>
+<%--                                        <div class="form-group col-md-12">--%>
+<%--                                            <input  class="form-control" type="text" readonly--%>
+<%--                                                   placeholder="Email: ${sessionScope.account.id}" name="editId">--%>
+<%--                                        </div>--%>
                                         <div class="col-md-12">
                                             <button class="btn">Update Account</button>
                                             <br><br>
