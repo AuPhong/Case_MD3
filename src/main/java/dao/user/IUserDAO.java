@@ -10,4 +10,6 @@ public interface IUserDAO extends IDAO<User> {
     void saveBuyer(User user);
     User findByEmail(String email);
     void editRole(int id, int role);
+    void editPassword(int id, String password);
+
 }

@@ -98,11 +98,21 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
+    public void editPassword(int id, String password) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update user set password=? where user_id=? ")) {
+            statement.setString(1,password);
+            statement.setInt(2,id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void editRole(int id, int role) {
-        System.out.println("Edit role");
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update user set Role=? where user_id=? ")) {
-            statement.setInt(1,id);
-            statement.setInt(2,role);
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update user set role=? where user_id=? ")) {
+            statement.setInt(1,role);
+            statement.setInt(2,id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

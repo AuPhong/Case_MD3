@@ -3,9 +3,9 @@ package model;
 public class Cart {
     private int cartId;
     private String productName;
-    private float productPrice;
+    private double productPrice;
     private int quantity;
-    private float priceTotal;
+    private double priceTotal;
     private String productImage;
     private int userId;
     private int productId;
@@ -13,7 +13,23 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int cartId, String productName, float productPrice, int quantity, float priceTotal, String productImage, int userId, int productId) {
+    public Cart(int cartId, int quantity, double priceTotal) {
+        this.cartId = cartId;
+        this.quantity = quantity;
+        this.priceTotal = priceTotal;
+    }
+
+    public Cart(String productName, double productPrice, int quantity, double priceTotal, String productImage, int userId, int productId) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.priceTotal = priceTotal;
+        this.productImage = productImage;
+        this.userId = userId;
+        this.productId = productId;
+    }
+
+    public Cart(int cartId, String productName, double productPrice, int quantity, double priceTotal, String productImage, int userId, int productId) {
         this.cartId = cartId;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -40,7 +56,7 @@ public class Cart {
         this.productName = productName;
     }
 
-    public float getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
@@ -56,7 +72,7 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public float getPriceTotal() {
+    public double getPriceTotal() {
         return priceTotal;
     }
 
@@ -86,5 +102,19 @@ public class Cart {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId +
+                ", productName='" + productName + '\'' +
+                ", productPrice=" + productPrice +
+                ", quantity=" + quantity +
+                ", priceTotal=" + priceTotal +
+                ", productImage='" + productImage + '\'' +
+                ", userId=" + userId +
+                ", productId=" + productId +
+                '}' + "\n";
     }
 }

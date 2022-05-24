@@ -191,89 +191,104 @@
 
                     <div class="tab-pane fade show active" id="account-tab" role="tabpanel"
                          aria-labelledby="account-nav">
+
+                        <h4>Account Details</h4>
                         <form action="accounts?action=editRole" method="post">
-                            <h4>Account Details</h4>
+                            <div class="row">
 
-                                <div class="row">
-
-                                    <div class="col-md-12">
-                                        <input class="form-control" readonly type="text"
-                                               placeholder="Full name: ${sessionScope.account.full_name}">
-                                    </div>
-                                    <%--                            <div class="col-md-6">--%>
-                                    <%--                                <input class="form-control" type="text" placeholder="Last Name">--%>
-                                    <%--                            </div>--%>
-                                    <div class="col-md-6">
-                                        <input class="form-control" readonly type="text"
-                                               placeholder="Phone: ${sessionScope.account.phone}">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" readonly
-                                               placeholder="Email: ${sessionScope.account.email}">
+                                <div class="col-md-12">
+                                    <input class="form-control" readonly type="text"
+                                           placeholder="Full name: ${sessionScope.account.full_name}">
+                                </div>
+                                <%--                            <div class="col-md-6">--%>
+                                <%--                                <input class="form-control" type="text" placeholder="Last Name">--%>
+                                <%--                            </div>--%>
+                                <div class="col-md-6">
+                                    <input class="form-control" readonly type="text"
+                                           placeholder="Phone: ${sessionScope.account.phone}">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" readonly
+                                           placeholder="Email: ${sessionScope.account.email}">
+                                </div>
+                                <div class="form-group col-md-12" hidden>
+                                    <label for="exampleFormControlSelect1">Role select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="editId">
+                                        <option selected>${sessionScope.account.user_id}</option>
+                                    </select>
+                                </div>
+                                <c:if test="${sessionScope.account.role==1}">
+                                    <div class="form-group col-md-12">
+                                        <label for="exampleFormControlSelect1">Role select</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="role">
+                                            <option value="1">Buyer</option>
+                                            <option value="2">Seller</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-12" hidden>
                                         <label for="exampleFormControlSelect1">Role select</label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="editId">
-                                            <option  selected>${sessionScope.account.user_id}</option>
+                                            <option selected>${sessionScope.account.user_id}</option>
                                         </select>
                                     </div>
-                                    <c:if test="${sessionScope.account.role==1}">
-                                        <div class="form-group col-md-12">
-                                            <label for="exampleFormControlSelect1">Role select</label>
-                                            <select class="form-control" id="exampleFormControlSelect1" name="role">
-                                                <option value="${sessionScope.account.role==1? "selected":""}" >Buyer</option>
-                                                <option value="${sessionScope.account.role==2? "selected":""}" >Seller</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-12" hidden>
-                                            <label for="exampleFormControlSelect1">Role select</label>
-                                            <select class="form-control" id="exampleFormControlSelect1" name="editId">
-                                                <option  selected>${sessionScope.account.user_id}</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button class="btn">Update Account</button>
-                                            <br><br>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${sessionScope.account.role==2}">
-                                        <div class="form-group col-md-12">
-                                            <label for="exampleFormControlSelect1">Role select</label>
-                                            <select class="form-control" id="exampleFormControlSelect1" name="role">
-                                                <option ${sessionScope.account.role==1? "selected":""}>Buyer</option>
-                                                <option ${sessionScope.account.role==2? "selected":""}>Seller</option>
-                                            </select>
-                                        </div>
-<%--                                        <div class="form-group col-md-12">--%>
-<%--                                            <input  class="form-control" type="text" readonly--%>
-<%--                                                   placeholder="Email: ${sessionScope.account.id}" name="editId">--%>
-<%--                                        </div>--%>
-                                        <div class="col-md-12">
-                                            <button class="btn">Update Account</button>
-                                            <br><br>
-                                        </div>
-                                    </c:if>
-
-
-                                </div>
-                            </form>
-                            <form action="">
-                                <h4>Password change</h4>
-                                <div class="row">
                                     <div class="col-md-12">
-                                        <input class="form-control" type="password" placeholder="Current Password">
+                                        <button class="btn">Update Account</button>
+                                        <br><br>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="New Password">
+                                </c:if>
+                                <c:if test="${sessionScope.account.role==2}">
+                                    <div class="form-group col-md-12">
+                                        <label for="exampleFormControlSelect1">Role select</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="role">
+                                            <option value="2" }>Seller</option>
+                                            <option value="1">Buyer</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Confirm Password">
-                                    </div>
+                                    <%--                                        <div class="form-group col-md-12">--%>
+                                    <%--                                            <input  class="form-control" type="text" readonly--%>
+                                    <%--                                                   placeholder="Email: ${sessionScope.account.id}" name="editId">--%>
+                                    <%--                                        </div>--%>
                                     <div class="col-md-12">
-                                        <button class="btn">Save Changes</button>
+                                        <button class="btn">Update Account</button>
+                                        <br><br>
                                     </div>
+                                </c:if>
+
+                            </div>
+                        </form>
+                        <form action="accounts?action=editPassword" method="post">
+                            <p>${mess}</p>
+                            <h4>Password change</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="password" placeholder="Current Password"
+                                           name="currentPassword">
                                 </div>
-                            </form>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" placeholder="New Password"
+                                           name="newPassword">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" placeholder="Confirm Password"
+                                           name="confirmPassword">
+                                </div>
+                                <div class="form-group col-md-12" hidden>
+                                    <label for="exampleFormControlSelect1">Role select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="editIdPass">
+                                        <option selected>${sessionScope.account.user_id}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12" hidden>
+                                    <label for="exampleFormControlSelect1">Role select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="userPass">
+                                        <option selected>${sessionScope.account.password}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
                         <div class="table-responsive">
