@@ -5,6 +5,7 @@
   Time: 9:36 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +17,9 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<%--  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+<%--  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>--%>
+<%--  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>--%>
   <style>
     body {
       color: #566787;
@@ -295,78 +296,17 @@
 								<label for="selectAll"></label>
 							</span>
           </th>
+          <th>Id</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Address</th>
+          <th>Password</th>
           <th>Phone</th>
-          <th>Actions</th>
+          <th>Role</th>
+          <th>Address</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="1">
-								<label for="checkbox1"></label>
-							</span>
-          </td>
-          <td>Thomas Hardy</td>
-          <td>thomashardy@mail.com</td>
-          <td>89 Chiaroscuro Rd, Portland, USA</td>
-          <td>(171) 555-2222</td>
-          <td>
-            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox2" name="options[]" value="1">
-								<label for="checkbox2"></label>
-							</span>
-          </td>
-          <td>Dominique Perrier</td>
-          <td>dominiqueperrier@mail.com</td>
-          <td>Obere Str. 57, Berlin, Germany</td>
-          <td>(313) 555-5735</td>
-          <td>
-            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox3" name="options[]" value="1">
-								<label for="checkbox3"></label>
-							</span>
-          </td>
-          <td>Maria Anders</td>
-          <td>mariaanders@mail.com</td>
-          <td>25, rue Lauriston, Paris, France</td>
-          <td>(503) 555-9931</td>
-          <td>
-            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox4" name="options[]" value="1">
-								<label for="checkbox4"></label>
-							</span>
-          </td>
-          <td>Fran Wilson</td>
-          <td>franwilson@mail.com</td>
-          <td>C/ Araquil, 67, Madrid, Spain</td>
-          <td>(204) 619-5731</td>
-          <td>
-            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-          </td>
-        </tr>
+        <c:forEach items="${listUser}" var="user">
         <tr>
           <td>
 							<span class="custom-checkbox">
@@ -374,15 +314,20 @@
 								<label for="checkbox5"></label>
 							</span>
           </td>
-          <td>Martin Blank</td>
-          <td>martinblank@mail.com</td>
-          <td>Via Monte Bianco 34, Turin, Italy</td>
-          <td>(480) 631-2097</td>
+
+          <td><c:out value="${user.user_id}"/></td>
+          <td><c:out value="${user.full_name}"/></td>
+          <td><c:out value="${user.email}"/></td>
+          <td><c:out value="${user.password}"/></td>
+          <td><c:out value="${user.phone}"/></td>
+          <td><c:out value="${user.role}"/></td>
+          <td><c:out value="${user.address}"/></td>
           <td>
-            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            <a href="loadUser?user_id=${user.user_id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+            <a href="/UserManagementServlet?action=delete&user_id=${user.user_id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>
+        </c:forEach>
         </tbody>
       </table>
       <div class="clearfix">
@@ -404,7 +349,7 @@
 <div id="addEmployeeModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form method="post" action="/UserManagementServlet?action=create">
         <div class="modal-header">
           <h4 class="modal-title">Add Employee</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -412,19 +357,27 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" required>
+            <input type="text" name="full_name" class="form-control" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" required></textarea>
+            <label>Password</label>
+            <input name="password" type="password" class="form-control" required></input>
           </div>
           <div class="form-group">
             <label>Phone</label>
-            <input type="text" class="form-control" required>
+            <input type="text" name="phone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <input type="text" name="role" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <textarea name="address" class="form-control" required> </textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -436,45 +389,14 @@
   </div>
 </div>
 <!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Employee</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" required></textarea>
-          </div>
-          <div class="form-group">
-            <label>Phone</label>
-            <input type="text" class="form-control" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-info" value="Save">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
 <!-- Delete Modal HTML -->
 <div id="deleteEmployeeModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form>
+      <form action="/UserManagementServlet">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="" value="">
         <div class="modal-header">
           <h4 class="modal-title">Delete Employee</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -485,7 +407,7 @@
         </div>
         <div class="modal-footer">
           <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-danger" value="Delete">
+          <input type="submit" class="btn btn-danger"  value="Delete">
         </div>
       </form>
     </div>

@@ -5,6 +5,8 @@ public class OrderDetail {
     private int orderId;
     private int quantityProduct;
 
+
+
     public OrderDetail() {
     }
 

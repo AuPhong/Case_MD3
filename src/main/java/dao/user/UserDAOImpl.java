@@ -3,9 +3,17 @@ package dao.user;
 import model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements IUserDAO {
+    private static final String INSERT_USERS_SQL = "INSERT INTO user" + "  (full_name, email, password,phone,role,address) VALUES " +
+            " (?, ?, ?,?,?,?);";
+
+    private static final String SELECT_USER_BY_ID = "select user_id,full_name, email, password,phone,role,address from user where user_id =?";
+    private static final String SELECT_ALL_USERS = "select * from user";
+    private static final String DELETE_USERS_SQL = "delete from user where user_id = ?;";
+    private static final String UPDATE_USERS_SQL = "update user set full_name =?, email=?, password=?,phone=?,role=?,address=? where user_id = ?;";
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -21,7 +29,32 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     public List<User> findAll() {
-        return null;
+        //using try-with-resources to avoid closing resources (boiler plate code)
+        List<User> users = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id = rs.getInt("user_id");
+                String full_name = rs.getString("full_name");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String phone = rs.getString("phone");
+                int role = rs.getInt("role");
+                String address = rs.getString("address");
+                users.add(new User(id, full_name, email, password, phone, role, address));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
     @Override
@@ -33,7 +66,6 @@ public class UserDAOImpl implements IUserDAO {
             statement.setString(4, user.getPhone());
             statement.setInt(5, user.getRole());
             statement.setString(6, user.getAddress());
-
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -93,8 +125,31 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public void edit(User user) {
+    public void deleteById(int id) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @Override
+    public void edit(User user) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+            statement.setString(1, user.getFull_name());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getPhone());
+            statement.setInt(5, user.getRole());
+            statement.setString(6, user.getAddress());
+            statement.setInt(7, user.getUser_id());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -126,7 +181,31 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     public User findById(int id) {
-        return null;
+        User user = null;
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                String full_name = rs.getString("full_name" +
+                        "");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String phone = rs.getString("phone");
+                int role = rs.getInt("role");
+                String address = rs.getString("address");
+                user = new User(id, full_name, email, password, phone, role, address);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
 

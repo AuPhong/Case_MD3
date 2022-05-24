@@ -12,4 +12,6 @@ public interface IProductDAO extends IDAO<Product> {
     List<Product> getProductByCID(String category_id);
     Product getProductByID(String id);
     List<Product> getProductByName(String productName);
+
+    int getSellerIdByProductId (int productId);
 }

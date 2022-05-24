@@ -28,10 +28,19 @@ public class CartServlet extends HttpServlet {
             case "insert":
                 insertCart(request, response);
                 break;
+            case "delete":
+                deleteCart(request,response);
+                break;
             default:
                 showCart(request, response);
                 break;
         }
+    }
+
+    private void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int cartId = Integer.parseInt(request.getParameter("id"));
+        cartDAO.deleteById(cartId);
+        showCart(request, response);
     }
 
     private void insertCart(HttpServletRequest request, HttpServletResponse response) throws IOException {

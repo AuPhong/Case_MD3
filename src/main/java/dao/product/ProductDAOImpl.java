@@ -184,6 +184,29 @@ public class ProductDAOImpl implements IProductDAO{
         return null;
     }
 
+    public Product getProductByID(int id) {
+        String query = "select*from product\n" +
+                "where product_id = ?;";
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(query);
+        ) {
+            statement.setInt(1,id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public List<Product> getProductByName(String productName) {
         List<Product> products = new ArrayList<>();
@@ -313,6 +336,24 @@ public class ProductDAOImpl implements IProductDAO{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int getSellerIdByProductId(int productId) {
+        int sellerId = 0;
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement =connection.prepareStatement("select seller_id from product where product_id = ?;");
+        ) {
+            statement.setInt(1, productId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                sellerId = rs.getInt("seller_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sellerId;
     }
 
     public static void main(String[] args) {

@@ -242,11 +242,11 @@
                     <div class="checkout-summary">
                         <h1>Cart Total</h1>
                         <c:forEach items="${cartList}" var="cart">
-                            <p>${cart.productName}<span>${cart.priceTotal}</span></p>
+                            <p>${cart.productName}<span>$${cart.priceTotal}</span></p>
                         </c:forEach>
-                        <p class="sub-total">Sub Total<span>${subTotal}</span></p>
+                        <p class="sub-total">Sub Total<span>$${subTotal}</span></p>
                         <p class="ship-cost">Shipping Cost<span>$1</span></p>
-                        <h2>Grand Total<span>${subTotal + 1}</span></h2>
+                        <h2>Grand Total<span>$${subTotal + 1}</span></h2>
                     </div>
 
                     <div class="checkout-payment">
@@ -309,7 +309,7 @@
                             </div>
                         </div>
                         <div class="checkout-btn">
-                            <a href="CheckoutServlet?action=insertOrder"><button>Place Order</button></a>
+                            <a href="OrderServlet?action=insertOrder&userId=${sessionScope.account.user_id}"><button>Place Order</button></a>
                         </div>
                     </div>
                 </div>

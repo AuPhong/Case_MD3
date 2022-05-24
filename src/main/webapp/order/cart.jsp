@@ -187,7 +187,7 @@
                                             <p>${cart.productName}</p>
                                         </div>
                                     </td>
-                                    <td>${cart.productPrice}</td>
+                                    <td>$${cart.productPrice}</td>
 <%--                                    <td><input type="number" value="${cart.productPrice}" id="price"></td>--%>
                                     <td>
                                         <div class="qty">
@@ -197,9 +197,9 @@
                                             <button class="btn-plus" id="down"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </td>
-                                    <td>${cart.priceTotal}</td>
+                                    <td>$${cart.priceTotal}</td>
 <%--                                    <td><input type="number"  value="${cart.priceTotal}" id="totalPrice"></td>--%>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
+                                    <td><a href="/CartServlet?action=delete&id=${cart.cartId}"><button><i class="fa fa-trash"></i></button></a></td>
                                 </tr>
                             </c:forEach>
 
@@ -222,9 +222,9 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>Cart Summary</h1>
-                                    <p>Sub Total<span>${subTotal}</span></p>
+                                    <p>Sub Total<span>$${subTotal}</span></p>
                                     <p>Shipping Cost<span>$1</span></p>
-                                    <h2>Grand Total<span>${subTotal + 1}</span></h2>
+                                    <h2>Grand Total<span>$${subTotal + 1}</span></h2>
                                 </div>
                                 <div class="cart-btn">
                                     <button>Update Cart</button>

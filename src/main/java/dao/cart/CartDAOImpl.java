@@ -55,8 +55,38 @@ public class CartDAOImpl implements ICartDAO {
     }
 
     @Override
-    public void delete(Cart cart) {
+    public void deleteByUserId(int userId) {
+        try(Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("delete from cart where user_id =?")){
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @Override
+    public void updateQuantityStock(int quantityStock, int productId) {
+        try(Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update product set quantity = ? where product_id = ?")){
+            statement.setInt(1,quantityStock);
+            statement.setInt(2, productId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteById(int id) {
+        try(Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("delete from cart where id =?")){
+            statement.setInt(1,id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void delete(Cart cart) {
     }
 
     @Override

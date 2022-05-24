@@ -238,9 +238,9 @@
                                         <a href="#"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
-                                <div class="product-price">
-                                    <h3>${o.productPrice} <span>VND</span></h3>
-                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                <div class="product-price"  style="text-align: center !important;">
+                                    <h3>${o.productPrice} <span>$</span></h3>
+<%--                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
                                 </div>
                             </div>
                         </div>
