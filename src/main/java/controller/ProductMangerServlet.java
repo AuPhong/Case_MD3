@@ -37,11 +37,25 @@ public class ProductMangerServlet extends HttpServlet {
     }
 
     private void showProductManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
-        int id = user.getUser_id();
-        List<Product> list = productDAO.getProductBySellID(id);
-        request.setAttribute("listP",list);
+//        HttpSession session = request.getSession();
+//        User user = (User) session.getAttribute("account");
+//        int id = user.getUser_id();
+//        List<Product> list = productDAO.getProductBySellID(id);
+//        request.setAttribute("listP",list);
+                int count = productDAO.getTotalProduct();
+        int endPage = count/6;
+        if(count%6 != 0) {
+            endPage ++;
+        }
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+        List<Product> list = productDAO.pagingProduct(index);
+        request.setAttribute("listA",list);
+        request.setAttribute("endPage",endPage);
+        request.setAttribute("tag",indexPage);
         request.getRequestDispatcher("product/productManager.jsp").forward(request,response);
     }
 

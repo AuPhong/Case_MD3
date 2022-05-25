@@ -215,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                    <c:forEach items="${listA}" var="o">
+                    <c:forEach items="${listProduct}" var="o">
                         <div class="col-md-4">
                             <div class="product-item">
                                 <div class="product-title">
@@ -245,6 +245,8 @@
                             </div>
                         </div>
                     </c:forEach>
+                </div>
+
 
                     <%--                    <div class="col-md-4">--%>
                     <%--                        <div class="product-item">--%>
@@ -476,18 +478,18 @@
                     <div class="col-md-12">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-<%--                                <li class="page-item disabled">--%>
-<%--                                    <a class="page-link" href="#" tabindex="-1">Previous</a>--%>
-<%--                                </li>--%>
-                                <c:forEach begin="1" end="${endPage}" var="i">
-                                    <li class="page-item ${tag == i? "active":""}"><a class="page-link" href="/products?index=${i}">${i}</a></li>
-                                </c:forEach>
-
-<%--                                <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--                                <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--                                <li class="page-item">--%>
-<%--                                    <a class="page-link" href="#">Next</a>--%>
-<%--                                </li>--%>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+<%--                                <c:forEach begin="1" end="${endPage}" var="i">--%>
+<%--                                    <li class="page-item ${tag == i? "active":""}"><a class="page-link" href="/products?index=${i}">${i}</a></li>--%>
+<%--                                </c:forEach>--%>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
