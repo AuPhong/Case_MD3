@@ -17,9 +17,9 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<%--  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
-<%--  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>--%>
-<%--  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>--%>
+  <%--  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+  <%--  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>--%>
+  <%--  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>--%>
   <style>
     body {
       color: #566787;
@@ -282,8 +282,12 @@
             <h2>Manage <b>Employees</b></h2>
           </div>
           <div class="col-sm-6">
-            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+            <a href="/addUsers" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+            <%--            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span></span></a>--%>
+            <form action="/UserManagementServlet">
+              <input type="text" name="name" placeholder="Search by Name">
+              <button type="submit">Search</button>
+            </form>
           </div>
         </div>
       </div>
@@ -306,40 +310,36 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${listUser}" var="user">
-        <tr>
-          <td>
+        <c:forEach items="${listU}" var="user">
+          <tr>
+            <td>
 							<span class="custom-checkbox">
 								<input type="checkbox" id="checkbox5" name="options[]" value="1">
 								<label for="checkbox5"></label>
 							</span>
-          </td>
+            </td>
 
-          <td><c:out value="${user.user_id}"/></td>
-          <td><c:out value="${user.full_name}"/></td>
-          <td><c:out value="${user.email}"/></td>
-          <td><c:out value="${user.password}"/></td>
-          <td><c:out value="${user.phone}"/></td>
-          <td><c:out value="${user.role}"/></td>
-          <td><c:out value="${user.address}"/></td>
-          <td>
-            <a href="loadUser?user_id=${user.user_id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-            <a href="/UserManagementServlet?action=delete&user_id=${user.user_id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-          </td>
-        </tr>
+            <td><c:out value="${user.user_id}"/></td>
+            <td><c:out value="${user.full_name}"/></td>
+            <td><c:out value="${user.email}"/></td>
+            <td><c:out value="${user.password}"/></td>
+            <td><c:out value="${user.phone}"/></td>
+            <td><c:out value="${user.role}"/></td>
+            <td><c:out value="${user.address}"/></td>
+            <td>
+              <a href="loadUser?user_id=${user.user_id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+              <a href="/UserManagementServlet?action=delete&user_id=${user.user_id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+            </td>
+          </tr>
         </c:forEach>
         </tbody>
       </table>
       <div class="clearfix">
-        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+        <div class="hint-text"><b>${endPage}</b> entries</div>
         <ul class="pagination">
-          <li class="page-item disabled"><a href="#">Previous</a></li>
-          <li class="page-item"><a href="#" class="page-link">1</a></li>
-          <li class="page-item"><a href="#" class="page-link">2</a></li>
-          <li class="page-item active"><a href="#" class="page-link">3</a></li>
-          <li class="page-item"><a href="#" class="page-link">4</a></li>
-          <li class="page-item"><a href="#" class="page-link">5</a></li>
-          <li class="page-item"><a href="#" class="page-link">Next</a></li>
+          <c:forEach begin="1" end="${endPage}" var="i">
+            <li class="page-item" ${tag == i? "active" : ""}><a href="/UserManagementServlet?index=${i}" class="page-link">${i}</a></li>
+          </c:forEach>
         </ul>
       </div>
     </div>

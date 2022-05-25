@@ -3,6 +3,8 @@ package dao.product;
 import model.Category;
 import model.Product;
 
+import javax.servlet.http.HttpSession;
+import java.net.HttpCookie;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -366,9 +368,9 @@ public class ProductDAOImpl implements IProductDAO{
     }
 
     public void addProduct(String pname,  String pprice,String pimage, String pdescription, String pquantity, String pcategory, int sid) {
-
+        System.out.println();
         String query = "insert into product(product_name,product_price,product_image,description,quantity,category_id,seller_id)\n" +
-                "value (?,?,?,?,?,?,?);";
+                "values (?,?,?,?,?,?,?);";
         try(
                 Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)

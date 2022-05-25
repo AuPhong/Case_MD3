@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements IUserDAO {
+    private static final String SELECT_USER_BY_NAME="select user_id,full_name,email,password, phone, role, address from user where full_name like ?";
     private static final String INSERT_USERS_SQL = "INSERT INTO user" + "  (full_name, email, password,phone,role,address) VALUES " +
             " (?, ?, ?,?,?,?);";
 
@@ -178,6 +179,70 @@ public class UserDAOImpl implements IUserDAO {
     public void delete(User user) {
 
     }
+
+    public List<User> findByName(String nameSearch) {
+        List<User> userList = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_NAME);) {
+            preparedStatement.setString(1,"%" + nameSearch + "%");
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id= rs.getInt("user_id");
+                String full_name = rs.getString("full_name");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String phone = rs.getString("phone");
+                int role = rs.getInt("role");
+                String address = rs.getString("address");
+                userList.add(new User(id, full_name, email, password, phone, role,address));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+    public int getTotalUser() throws SQLException {
+        String query = "select count(*) from user;";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                return  rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+    public List<User> pagingUser(int index){
+        List<User> list = new ArrayList<>();
+        String query = "select*from user\n" +
+                "order by user_id limit ?, 5";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, (index-1)*5);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("user_id");
+                String full_name = rs.getString("full_name");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                String phone = rs.getString("phone");
+                int role = rs.getInt("role");
+                String address = rs.getString("address");
+
+                list.add(new User(id, full_name,email,password,phone,role,address));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
     @Override
     public User findById(int id) {

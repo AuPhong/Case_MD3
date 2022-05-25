@@ -241,6 +241,7 @@
                                 <div class="product-price"  style="text-align: center !important;">
                                     <h3>${o.productPrice} <span>$</span></h3>
 <%--                                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>--%>
+                                    <h5 style="color: white">Available: ${o.quantityProduct}</h5>
                                 </div>
                             </div>
                         </div>

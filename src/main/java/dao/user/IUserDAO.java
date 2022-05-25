@@ -3,6 +3,8 @@ package dao.user;
 import dao.IDAO;
 import model.User;
 
+import java.util.List;
+
 public interface IUserDAO extends IDAO<User> {
     User checkLogin(String name, String pass);
     User checkRegister(String name);
@@ -12,5 +14,7 @@ public interface IUserDAO extends IDAO<User> {
     void editRole(int id, int role);
     void editPassword(int id, String password);
     void deleteById(int id);
+    List<User> findByName(String nameSearch);
+
 
 }
