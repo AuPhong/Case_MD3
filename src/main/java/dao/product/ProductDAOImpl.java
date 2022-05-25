@@ -315,12 +315,34 @@ public class ProductDAOImpl implements IProductDAO{
         }
     }
 
+
     public static void main(String[] args) {
         ProductDAOImpl productDAO = new ProductDAOImpl();
         List<Product> list = productDAO.pagingProduct(1);
         for (Product p: list
              ) {
             System.out.println(p);
+        }
+    }
+
+    public void addProduct(String pname,  String pprice,String pimage, String pdescription, String pquantity, String pcategory, int sid) {
+
+        String query = "insert into product(product_name,product_price,product_image,description,quantity,category_id,seller_id)\n" +
+                "value (?,?,?,?,?,?,?);";
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+            statement.setString(1,pname);
+            statement.setString(2,pprice);
+            statement.setString(3,pimage);
+            statement.setString(4,pdescription);
+            statement.setString(5,pquantity);
+            statement.setString(6,pcategory);
+            statement.setInt(7,sid);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

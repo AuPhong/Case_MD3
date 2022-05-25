@@ -330,10 +330,8 @@
                         <h2>Manage <b>Product</b></h2>
                     </div>
                     <div class="col-sm-6">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                        <a href="/addProducts" class="btn btn-success" data-toggle="modal"><i
                                 class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-                        <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
-                                class="material-icons">&#xE15C;</i> <span>Delete</span></a>
                     </div>
                 </div>
             </div>
@@ -355,7 +353,7 @@
                 </thead>
 
                     <tbody>
-                    <c:forEach items="${listP}" var="o">
+                    <c:forEach items="${listA}" var="o">
                     <tr>
                         <td>
 							<span class="custom-checkbox">
@@ -382,15 +380,18 @@
 
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <div class="hint-text">Total <b>${endPage}</b> page</div>
                 <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+<%--                    <li class="page-item disabled"><a href="#">Previous</a></li>--%>
+                    <c:forEach begin="1" end="${endPage}" var="i">
+                        <li class="page-item ${tag == i? "active":""}"><a href="/ProductMangerServlet?index=${i}" class="page-link">${i}</a></li>
+                    </c:forEach>
+
+<%--                    <li class="page-item"><a href="#" class="page-link">2</a></li>--%>
+<%--                    <li class="page-item active"><a href="#" class="page-link">3</a></li>--%>
+<%--                    <li class="page-item"><a href="#" class="page-link">4</a></li>--%>
+<%--                    <li class="page-item"><a href="#" class="page-link">5</a></li>--%>
+<%--                    <li class="page-item"><a href="#" class="page-link">Next</a></li>--%>
                 </ul>
             </div>
         </div>

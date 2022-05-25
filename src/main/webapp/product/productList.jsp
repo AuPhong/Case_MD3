@@ -245,6 +245,8 @@
                             </div>
                         </div>
                     </c:forEach>
+                </div>
+
 
                     <%--                    <div class="col-md-4">--%>
                     <%--                        <div class="product-item">--%>
