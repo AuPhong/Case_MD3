@@ -70,7 +70,7 @@
                     </c:if>
                     <c:if test="${sessionScope.account.role == 2}">
                         <a href="/ProductMangerServlet" class="nav-item nav-link">Product manager</a>
-                        <a href="/OrderManagerServlet" class="nav-item nav-link">Orders manager</a>
+                        <a href="/OrderManagerServlet?sellerId=${sessionScope.account.user_id}" class="nav-item nav-link">Orders manager</a>
 <%--                        <a href="my-account.html" class="nav-item nav-link">My Account</a>--%>
                     </c:if>
                     <c:if test="${sessionScope.account.role == 3}">

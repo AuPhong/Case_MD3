@@ -37,24 +37,28 @@ public class OrderDAOImpl implements IOrderDAO {
     @Override
     public List<Order> findAll() {
         List<Order> orderList = new ArrayList<>();
-//        try {
-//            Connection connection = getConnection();
-//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDER);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//                int orderId = resultSet.getInt("o.orderId");
-//                Date orderDate = resultSet.getDate("o.date");
-//                int customerName = resultSet.getInt("c.customer_name");
-//                int status = resultSet.getBoolean("o.status");
-//                int sellerName = resultSet.getInt("s.seller_name");
-//                Order order = new Order(orderId, orderDate, customerName, sellerName, status);
-//                orderList.add(order);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from tbl_order");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int order_id = resultSet.getInt("order_id");
+                int status = resultSet.getInt("status");
+                Date date = resultSet.getDate("date");
+                int customer_id = resultSet.getInt("customer_id");
+                double priceTotal = resultSet.getDouble("priceTotal");
+                int seller_id = resultSet.getInt("seller_id");
+                int product_id = resultSet.getInt("productId");
+                int productQuantity = resultSet.getInt("productQuantity");
+                Order order = new Order(order_id, date, status, customer_id, seller_id,product_id,productQuantity,priceTotal);
+                orderList.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return orderList;
     }
+
 
 
     @Override
@@ -137,6 +141,32 @@ public class OrderDAOImpl implements IOrderDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Order> findBySellerId(int sellerId) {
+        List<Order> orderList = new ArrayList<>();
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from tbl_order where seller_id=?");
+            preparedStatement.setInt(1,sellerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int order_id = resultSet.getInt("order_id");
+                int status = resultSet.getInt("status");
+                Date date = resultSet.getDate("date");
+                int customer_id = resultSet.getInt("customer_id");
+                double priceTotal = resultSet.getDouble("priceTotal");
+                int seller_id = resultSet.getInt("seller_id");
+                int product_id = resultSet.getInt("productId");
+                int productQuantity = resultSet.getInt("productQuantity");
+                Order order = new Order(order_id, date, status, customer_id, seller_id,product_id,productQuantity,priceTotal);
+                orderList.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orderList;
     }
 
 

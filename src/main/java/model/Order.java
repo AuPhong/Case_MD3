@@ -50,6 +50,21 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
+    public Order(int orderId, Date orderDate, int status, int customerId, int sellerId, int productId, int productQuantity, double totalPrice) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.status = status;
+        this.customerId = customerId;
+        this.sellerId = sellerId;
+        this.productId = productId;
+        this.productQuantity = productQuantity;
+        this.totalPrice = totalPrice;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
     public Order(Date orderDate, int customerId, int status) {
         this.orderDate = orderDate;
         this.customerId = customerId;
